@@ -1,1 +1,24 @@
- <h1>Welcome to our E-Commerce app </h1>
+<div class="container">
+  <app-cockpit (serverCreated)="ServerAdded($event)"
+  (blueprintCreated)="ServerBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+<app-server-elemnt *ngFor="let serverElement of serverElements"
+[srvElement]="serverElement"
+>
+
+<p>
+  <strong *ngIf="serverElement.type === 'server'" style="color: red">{{
+    serverElement.content
+  }}</strong>
+
+  <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+</p>
+
+
+</app-server-elemnt>
+    </div>
+  </div>
+</div>
