@@ -1,12 +1,14 @@
 <div class="container">
-  <form class="signIn-form">
+  <form class="signIn-form" (ngSubmit)="signIn(SignIn.value)" #SignIn="ngForm" >
     <br />
     <label for="email">Email</label>
-    <input id="email" ngModel name="email" type="email" />
+    <input id="email"   ngModel name="email" type="email" />
     <br />
     <label for="password">Password</label>
-    <input id="password"   name="password" type="password" />
+    <input id="password"   ngModel name="password" type="password" />
     <br />
     <button class="btn btn-primary" type="submit">Sign-In</button>
   </form>
+
+  <p >{{msg}}</p>
 </div>
