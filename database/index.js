@@ -7,21 +7,24 @@ const app = express();
 const PORT = 5000;
 
 // Import Routers
-const articlesRouter = require("./routes/articles");
+ 
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
-const rolesRouter = require("./routes/roles");
-const permissionRouter = require("./routes/permission");
+ const productsRouter=require("./routes/products")
+ const cartRouter=require("./routes/cart")
+ 
 
 app.use(cors());
 app.use(express.json());
 
 // Routes Middleware
-app.use("/articles", articlesRouter);
+ 
 app.use("/register", registerRouter);
-app.use("/roles", rolesRouter);
+ 
 app.use("/login", loginRouter);
-app.use("/permission", permissionRouter);
+ 
+app.use("/products", productsRouter);
+app.use("/cart", cartRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));

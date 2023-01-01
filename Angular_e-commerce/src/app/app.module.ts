@@ -11,7 +11,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
-@NgModule({
+  @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -19,8 +19,9 @@ import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
     SignInComponent,
     ProductsComponent,
     OrdersComponent,
-    CartComponent
-  ],
+    CartComponent,
+
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

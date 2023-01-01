@@ -1,1 +1,28 @@
-<p>cart works!</p>
+<div class="container">
+
+  <div class="item" *ngFor="let product of cartProducts">
+  <img src={{product.image}} />
+  <br>
+  <p>{{product.title}}</p>
+
+  <p>{{product.price}}</p>
+  <p>Quantity:{{product.quantity }}</p>
+
+  <button class="btn btn-danger"  >Remove from Cart</button>
+
+
+  <div class="addToCart">
+
+    <button>+</button>Quantity <button>-</button>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  </div>

@@ -1,0 +1,15 @@
+.container{
+  display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+
+}
+img{
+  height: 100px;
+  width: 100px;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

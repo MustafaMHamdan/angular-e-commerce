@@ -13,11 +13,14 @@ export class SignInComponent {
   msg: any = '';
   errorMsg: any = '';
   massage: any = {};
+  token: any = '';
 
   signIn(form: NgForm) {
     this._HttpClient.post(`http://localhost:5000/login`, form).subscribe({
       next: (v) => {
-        /* this.massage=v,this.msg=this.massage.message */ console.log(v);
+        (this.token = v), localStorage.setItem('token', this.token.token);
+
+        console.log(v);
       },
       error: (e) => (this.msg = e.error.message),
       complete: () => console.info('complete'),

@@ -4,7 +4,7 @@ const showCartProducts = (req, res) => {
   const userId = req.token.userId;
 
   const query =
-    "select id,image,price ,quantity ,title from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.is_deleted=0";
+    "select id,image,price ,quantity ,title from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0";
 
   const data = [userId];
 
@@ -18,14 +18,15 @@ const showCartProducts = (req, res) => {
    
     if (result.length > 0) {
       let total = 0;
+
       for (let i = 0; i < result.length; i++) {
-        total = total + result[i].price;
+        total = total + result[i].price*result[i].quantity;
       }
 
       return res.status(200).json({
         success: true,
         cartProducts: result,
-        qty: result.length,
+        total_quantity: result.length,
         total: total,
       });
     } else {
@@ -41,7 +42,9 @@ const removeItem = (req, res) => {
   const userId = req.token.userId;
   const productId = req.params.id;
 
-  const query = `UPDATE cart SET is_deleted=1 WHERE BuyerId=? AND id=? `;
+ 
+
+  const query = `update cart  SET quantity = CASE WHEN (quantity > 0) then  quantity-1 else 0  end  `;
 
   const data = [userId, productId];
 
@@ -67,6 +70,13 @@ const removeItem = (req, res) => {
     });
   });
 };
+
+
+/*  */
+
+
+
+
 
 module.exports = {
   showCartProducts,
