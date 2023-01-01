@@ -32,6 +32,35 @@ console.log(this.cartProducts);
     });
   }
 
+
+  removeFromCard(id:any){
+    this._HttpClient
+        .put(
+          `http://localhost:5000/cart/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .subscribe({
+          next: (v) => {
+            console.log(v);
+          },
+          error: (e) => {
+            console.log(e);
+          },
+          complete: () => console.info('complete'),
+        });
+
+     
+
+
+  }
+
+
+
   ngOnInit() {
     this.getCartItems();
   }

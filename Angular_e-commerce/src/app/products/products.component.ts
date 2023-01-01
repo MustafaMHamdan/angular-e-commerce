@@ -47,13 +47,7 @@ counter:number=0
   }
 
 
-removeFromCard(){
-if( this.counter>0)
 
-{  this.counter--}
-
-
-}
 
 
 

@@ -4,7 +4,7 @@ const showCartProducts = (req, res) => {
   const userId = req.token.userId;
 
   const query =
-    "select id,image,price ,quantity ,title from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0";
+    "select id,image,price ,quantity ,title ,cart.productId from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0";
 
   const data = [userId];
 
@@ -44,7 +44,7 @@ const removeItem = (req, res) => {
 
  
 
-  const query = `update cart  SET quantity = CASE WHEN (quantity > 0) then  quantity-1 else 0  end  `;
+  const query = `update cart  SET quantity = CASE WHEN (quantity > 0) then  quantity-1 else 0  end where BuyerId=? AND  productId=?   `;
 
   const data = [userId, productId];
 
