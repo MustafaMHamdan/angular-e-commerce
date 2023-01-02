@@ -1,5 +1,27 @@
 const connection = require("../models/db");
 
+const addProduct = (req, res) => {
+  const { title, price, image } = req.body;
+  SellerId = req.token.userId;
+
+  const query = `INSERT INTO products (title,price, image ,SellerId) VALUES (?,?,?,?)`;
+  const data = [title, price, image, SellerId];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(409).json({
+        success: false,
+        err: err.message,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      massage: "Product Added Successfully",
+      result: data,
+    });
+  });
+};
+
 const getAllProducts = (req, res) => {
   const query = "select * from products where is_deleted =0 ";
 
@@ -107,40 +129,9 @@ const addToCart = (req, res) => {
   });
 };
 
-
-const removeFromCart = (req, res) => {
-  const id = req.params.id;
-  const userId = req.token.userId;
-
-
-
-  const query = `update cart SET quantity = (quantity - 1) where productId=? AND is_deleted =0 `;
-  const data = [id];
-         connection.query(query, data, (err, res2) => {
-            if (err) {
-              return res.status(500).json({
-                success: false,
-                err: err.message,
-              });
-            }
-            if (res2) {
-              return res.status(201).json({
-                success: true,
-                massage: "the product has been removed from cart successfully",
-                result: res2,
-              });
-            }
-          });
- 
- 
-};
-
-
-
-
 module.exports = {
   getAllProducts,
   getProductById,
   addToCart,
-  removeFromCart
+  addProduct,
 };

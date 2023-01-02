@@ -12,7 +12,8 @@ const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
  const productsRouter=require("./routes/products")
  const cartRouter=require("./routes/cart")
- 
+ const roleRouter = require("./routes/role");
+const permissionRouter = require("./routes/permissions");
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +26,8 @@ app.use("/login", loginRouter);
  
 app.use("/products", productsRouter);
 app.use("/cart", cartRouter);
+app.use("/role", roleRouter);
+app.use("/permission", permissionRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));

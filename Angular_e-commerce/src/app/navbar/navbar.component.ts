@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+token: any = localStorage.getItem('token');
+
+
+signOut(){
+localStorage.clear()
+
+}
+
+
 }

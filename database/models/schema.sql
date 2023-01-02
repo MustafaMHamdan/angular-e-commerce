@@ -4,12 +4,20 @@ CREATE DATABASE angular_Cart;
 
 USE angular_Cart;
 
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE users(
     UserID INT AUTO_INCREMENT NOT NULL,
     userName VARCHAR(255),
     phone VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255),
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES roles(id),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (UserID)
 );
@@ -20,19 +28,38 @@ CREATE TABLE products (
     price INT,
     image VARCHAR(255),
     is_deleted TINYINT DEFAULT 0,
+    SellerId INT,
+    FOREIGN KEY (SellerId) REFERENCES users(UserID),
     PRIMARY KEY (productID)
 );
 
 CREATE TABLE cart(
-    id INT AUTO_INCREMENT NOT NULL,
+    cart_id INT AUTO_INCREMENT NOT NULL,
     BuyerId INT,
     productId INT,
-    quantity INT DEFAULT 1 ,
+    quantity INT DEFAULT 1,
     FOREIGN KEY (BuyerId) REFERENCES users(UserID),
     FOREIGN KEY (productId) REFERENCES products(productID),
     is_deleted TINYINT DEFAULT 0,
+    PRIMARY KEY (cart_id)
+);
+
+CREATE TABLE permissions (
+    id INT AUTO_INCREMENT NOT NULL,
+    permission VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE role_permission (
+    id INT NOT NULL AUTO_INCREMENT NOT NULL,
+    role_id INT,
+    permission_id INT,
+    FOREIGN KEY (role_id) REFERENCES roles (id),
+    FOREIGN KEY (permission_id) REFERENCES permissions (id),
+    PRIMARY KEY (id)
+);
+
+ 
 
 INSERT INTO
     products (
@@ -49,7 +76,7 @@ VALUES
         "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/refurb-iphone-12-purple-2021?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1635202738000"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -64,8 +91,7 @@ VALUES
         "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-13-Pro_iPhone-13-Pro-Max_09142021_inline.jpg.large.jpg"
     );
 
-
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -80,7 +106,7 @@ VALUES
         "https://images.macrumors.com/t/Op-ArH_mbIDx1Bdw7scj744cuzM=/800x0/smart/article-new/2019/03/ipad-air-2022-roundup-header.png?lossy"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -95,7 +121,7 @@ VALUES
         "https://images.samsung.com/is/image/samsung/p6pim/levant_ar/2208/gallery/levant-ar-galaxy-z-fold4-f936-sm-f936bzkgmea-thumb-533084503?$240_240_PNG$"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -110,7 +136,7 @@ VALUES
         "https://compujordan.com/image/cache/catalog/products/pc-and-laptops/laptops/HP-/15s-fq5000nia-(6G3G5EA)/hp-15s-fq5000nia-6G3G5EA_1-1200x1200.jpg"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -125,7 +151,7 @@ VALUES
         "https://m.media-amazon.com/images/I/71tc7Nl6VKS.__AC_SX300_SY300_QL70_FMwebp_.jpg"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -140,7 +166,7 @@ VALUES
         "https://m.media-amazon.com/images/I/51XqBeKo6UL._AC_SY450_.jpg"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -155,7 +181,7 @@ VALUES
         "https://cdn.shopify.com/s/files/1/0683/5673/5282/products/718B6zl_b6L._AC_SL1500_600x.jpg?v=1669537103"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,
@@ -170,7 +196,7 @@ VALUES
         "https://cdn.shopify.com/s/files/1/0385/8490/9956/products/huawei_nova_9_128gb_8gb_black_600x600.jpg?v=1642676730"
     );
 
-    INSERT INTO
+INSERT INTO
     products (
         productID,
         title,

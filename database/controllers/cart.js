@@ -4,7 +4,7 @@ const showCartProducts = (req, res) => {
   const userId = req.token.userId;
 
   const query =
-    "select id,image,price ,quantity ,title ,cart.productId from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0";
+    "select cart_id,image,price ,quantity ,title ,cart.productId from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0";
 
   const data = [userId];
 

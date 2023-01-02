@@ -12,7 +12,7 @@ export class SignInComponent {
 
   msg: any = '';
   errorMsg: any = '';
-  massage: any = {};
+  massage: any ='';
   token: any = '';
 
   signIn(form: NgForm) {
