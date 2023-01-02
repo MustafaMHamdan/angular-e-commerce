@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+ import { Routes,RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -11,6 +11,14 @@ import { OrdersComponent } from './orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
+
+const appRoutes:Routes=[
+{path:"products",component:ProductsComponent },
+{path:"cart",component:CartComponent },
+{path:"login",component:SignInComponent },
+{path:"signup",component:SignUpComponent },
+
+]
   @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +31,8 @@ import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
 
    ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    BrowserModule,RouterModule.forRoot(appRoutes),
+
     FormsModule,
     HttpClientModule
   ],

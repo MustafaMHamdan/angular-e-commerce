@@ -52,10 +52,11 @@ console.log(this.cartProducts);
             console.log(e);
           },
           complete: () => console.info('complete'),
+
         });
 
-     
 
+        this.getCartItems()
 
   }
 
