@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -39,6 +40,17 @@ this.dialog.afterAllClosed.subscribe(() => {
 }
 
 
+editDialog(id:any):void{
+  this.dialog.open(EditDialogComponent,{
+    width: '500px',
+    data: id
+  })
+
+  this.dialog.afterAllClosed.subscribe(() => {
+    this.getProducts();
+  });
+
+  }
 
 
 

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Add New Product</h1>
+<div mat-dialog-content>
+  <form
+    class="signIn-form"
+    (ngSubmit)="editProduct(editedProduct.value)"
+    #editedProduct="ngForm"
+  >
+    <br />
+    <label for="title">Title</label>
+    <input id="title" ngModel name="title" type="text" />
+    <br />
+    <label for="price">Price</label>
+    <input id="price" ngModel name="price" type="text" />
+    <br />
+    <label for="image">Image</label>
+    <input id="image" ngModel name="image" type="text" />
+    <button
+      class="btn btn-primary"
+      type="submit"
+      mat-button
+      mat-dialog-close
+
+    >
+      confirm
+    </button>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+
+</div>
