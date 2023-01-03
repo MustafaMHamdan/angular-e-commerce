@@ -24,11 +24,13 @@ export class ProductDialogComponent {
       },
     })
     .subscribe({
-      next: (v) => {} ,
+      next: (v) => {console.log(v);
+      } ,
       error: (e) => {console.log(e);
       },
       complete: () => console.info('complete')
   } );
+
 
   }
 

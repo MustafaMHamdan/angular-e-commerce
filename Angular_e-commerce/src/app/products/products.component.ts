@@ -21,8 +21,8 @@ counter:number=0
       width: '250px',
 
     });
-    this. getProducts()
-  }
+ this.dialog.afterAllClosed.subscribe(()=>{this.getProducts()})
+   }
 
   getProducts() {
     this._HttpClient.get(`http://localhost:5000/products`).subscribe((data) => {
