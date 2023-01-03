@@ -82,10 +82,10 @@ const getProductById = (req, res) => {
 
 const deleteProduct = (req, res) => {
   const id = req.params.id;
+  const userId = req.token.userId;
+  const query = `UPDATE products SET is_deleted=1  where productID=? AND SellerId=? ;`;
 
-  const query = `UPDATE products SET is_deleted=1  where productID=?;`;
-
-  const data = [id];
+  const data = [id,userId];
 
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -115,9 +115,10 @@ const deleteProduct = (req, res) => {
 const updateProduct = (req, res) => {
   const { title, price, image } = req.body;
   const id = req.params.id;
+  const userId = req.token.userId;
 
-  const query = `SELECT * FROM products WHERE productID=?;`;
-  const data = [id];
+  const query = `SELECT * FROM products WHERE productID=? AND SellerId=?;`;
+  const data = [id,userId];
 
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -128,26 +129,27 @@ const updateProduct = (req, res) => {
       });
     }
     if (!result) {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
         massage: `The Product: ${id} is not found`,
         err: err,
       });
-    } else {
-      const query = `UPDATE articles SET title=?, price=? image=? WHERE id=?;`;
-      const data = [
+    } else { console.log(result);
+      const query2 = `UPDATE products SET title=?, price=?, image=? WHERE productID=?;`;
+      const data2 = [
         title || result[0].title,
         price || result[0].price,
         image || result[0].image,
         id,
       ];
 
-      connection.query(query, data, (err, result) => {
-        if (result.affectedRows != 0)
-          res.status(201).json({
+      connection.query(query2, data2, (err, result2) => {
+        console.log(result2);
+        if (result2.affectedRows!=0 )
+         return res.status(201).json({
             success: true,
             massage: `Product updated`,
-            result: result,
+            result: result2,
           });
       });
     }
