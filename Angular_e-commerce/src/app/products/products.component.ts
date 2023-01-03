@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -24,6 +25,22 @@ export class ProductsComponent {
       this.getProducts();
     });
   }
+
+deleteDialog(id:any):void{
+this.dialog.open(DeleteDialogComponent,{
+  width: '500px',
+  data: id
+})
+
+this.dialog.afterAllClosed.subscribe(() => {
+  this.getProducts();
+});
+
+}
+
+
+
+
 
   getProducts() {
     this._HttpClient.get(`http://localhost:5000/products`).subscribe((data) => {

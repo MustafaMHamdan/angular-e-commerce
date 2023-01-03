@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 const appRoutes:Routes=[
 {path:"products",component:ProductsComponent },
@@ -31,6 +32,7 @@ const appRoutes:Routes=[
     OrdersComponent,
     CartComponent,
     ProductDialogComponent,
+    DeleteDialogComponent,
 
    ],
   imports: [
