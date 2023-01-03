@@ -17,10 +17,11 @@ export class SignInComponent {
   massage: any ='';
   token: any = '';
 
+
   signIn(form: NgForm) {
     this._HttpClient.post(`http://localhost:5000/login`, form).subscribe({
       next: (v) => {
-        (this.token = v), localStorage.setItem('token', this.token.token);
+        (this.token = v), localStorage.setItem('token', this.token.token),localStorage.setItem('role', this.token.result[0].role_id),localStorage.setItem('userId', this.token.result[0].UserID);
         if(this.token != ''){
           this.route.navigateByUrl('/products')
         }else{
@@ -28,9 +29,12 @@ export class SignInComponent {
         }
 
         console.log(v);
+      ;
+
       },
       error: (e) => (this.msg = e.error.message),
       complete: () => console.info('complete'),
     });
   }
 }
+

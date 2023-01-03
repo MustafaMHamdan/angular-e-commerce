@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <button class="btn btn-primary"  (click)="openDialog()">+</button>
+  <button class="btn btn-primary"  (click)="openDialog()" *ngIf="role ==1">+</button>
 
   <div class="products">
   <div class="item" *ngFor="let product of Products">
@@ -13,12 +13,16 @@
     <p>{{ product.price }}</p>
 
     <div class="addToCart">
-      <button class="btn btn-primary" (click)="addToCard(product.productID)">
-        +</button
-      >{{ counter }}
-      <button class="btaddn btn-primary">-</button>
-      <button class="btn btn-danger"  (click)="deleteDialog(product.productID)">X</button>
-      <button class="btn btn-primary"  (click)="editDialog(product.productID)">edit</button>
+      <div *ngIf="role ==2">
+
+
+      <button class="btn btn-primary" (click)="addToCard(product.productID)">+</button>{{ counter }}
+      <button class="btaddn btn-primary" *ngIf="role ==2">-</button></div>
+
+<div *ngIf="role ==1 && userId==product.SellerId">
+
+      <button class="btn btn-danger"  (click)="deleteDialog(product.productID)"  >X</button>
+      <button class="btn btn-primary"  (click)="editDialog(product.productID)" >edit</button></div>
     </div>
   </div>
   </div>

@@ -17,8 +17,11 @@ export class ProductsComponent {
   Products: any = [];
   counter: number = 0;
   token: any = localStorage.getItem('token');
+  role:any=localStorage.getItem('role');
+  userId:any=localStorage.getItem('userId');
 
-  openDialog(): void {
+  openDialog(): void {console.log(this.role);
+
     this.dialog.open(ProductDialogComponent, {
       width: '250px',
     });

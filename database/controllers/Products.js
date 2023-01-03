@@ -167,14 +167,14 @@ const addToCart = (req, res) => {
 
   connection.query(query, data, (err, result) => {
     if (result) {
-      const query3 = `select * from cart where productId=? AND is_deleted =0`;
-      const data3 = [id];
+      const query3 = `select * from cart where productId=? AND BuyerId=? And is_deleted =0`;
+      const data3 = [id,userId];
 
       connection.query(query3, data3, (err, result2) => {
         if (result2.length > 0) {
           console.log(result2);
-          const query4 = `update cart SET quantity = (quantity + 1) where productId=? AND is_deleted =0 `;
-          const data4 = [id];
+          const query4 = `update cart SET quantity = (quantity + 1) where productId=? AND BuyerId=? AND is_deleted =0 `;
+          const data4 = [id,userId];
 
           connection.query(query4, data4, (err, result3) => {
             if (result3) {
