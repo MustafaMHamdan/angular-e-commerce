@@ -1,4 +1,9 @@
+
+
 <div class="container">
+
+  <button class="btn btn-primary"  (click)="openDialog()">+</button>
+  <div class="products">
   <div class="item" *ngFor="let product of Products">
     <img src="{{ product.image }}" />
     <br />
@@ -10,7 +15,9 @@
       <button class="btn btn-primary" (click)="addToCard(product.productID)">
         +</button
       >{{ counter }}
-      <button class="btn btn-primary" >-</button>
+      <button class="btaddn btn-primary">-</button>
+
     </div>
+  </div>
   </div>
 </div>

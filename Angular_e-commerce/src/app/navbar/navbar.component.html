@@ -13,7 +13,7 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link active"  routerLink="/products" >Products </a>
         <a class="nav-item nav-link active" routerLink="/cart">Cart</a>
-        <a *ngIf="!token" class="nav-item nav-link active" href="login">Sign In</a>
+        <a *ngIf="!token" class="nav-item nav-link active" routerLink="login">Sign In</a>
         <a class="nav-item nav-link active " routerLink="/signup">Sign Up</a>
         <a *ngIf="token" (click)="signOut()"    class="nav-item nav-link active " href="products">Sign out</a>
       </div>

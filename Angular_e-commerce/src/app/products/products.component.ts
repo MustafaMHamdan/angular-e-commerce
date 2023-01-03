@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -7,13 +9,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent {
-  constructor(public _HttpClient: HttpClient,   ) {}
+  constructor(public _HttpClient: HttpClient,public dialog: MatDialog   ) {}
 
   allProducts: any = [];
   Products: any = [];
 counter:number=0
   token: any = localStorage.getItem('token');
 
+  openDialog( ): void {
+    this.dialog.open(ProductDialogComponent, {
+      width: '250px',
+
+    });
+    this. getProducts()
+  }
 
   getProducts() {
     this._HttpClient.get(`http://localhost:5000/products`).subscribe((data) => {
@@ -46,7 +55,10 @@ counter:number=0
       this.counter++
   }
 
+addNewProduct(){
+  console.log(5);
 
+}
 
 
 

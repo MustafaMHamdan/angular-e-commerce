@@ -11,6 +11,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes:Routes=[
 {path:"products",component:ProductsComponent },
@@ -28,10 +30,11 @@ const appRoutes:Routes=[
     ProductsComponent,
     OrdersComponent,
     CartComponent,
+    ProductDialogComponent,
 
    ],
   imports: [
-    BrowserModule,RouterModule.forRoot(appRoutes),
+    BrowserModule,RouterModule.forRoot(appRoutes),MatDialogModule,
 
     FormsModule,
     HttpClientModule

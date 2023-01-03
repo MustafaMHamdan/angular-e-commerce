@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
-  constructor(public _HttpClient: HttpClient) {}
+  constructor(public _HttpClient: HttpClient,
+    private  route : Router) {}
 
   msg: any = '';
   errorMsg: any = '';
@@ -19,6 +21,11 @@ export class SignInComponent {
     this._HttpClient.post(`http://localhost:5000/login`, form).subscribe({
       next: (v) => {
         (this.token = v), localStorage.setItem('token', this.token.token);
+        if(this.token != ''){
+          this.route.navigateByUrl('/products')
+        }else{
+          return ;
+        }
 
         console.log(v);
       },

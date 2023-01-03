@@ -16,6 +16,7 @@ const login = (req, res) => {
         if (response) {console.log(result);
           const payload = {
             userId: result[0].UserID,
+            role_id: result[0].role_id,
                       };
           const secret = process.env.SECRET;
 

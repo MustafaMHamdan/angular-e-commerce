@@ -1,8 +1,14 @@
 .container{
-  display: grid;
- grid-template-columns: 1fr 1fr 1fr;
-
+display: flex;
+flex-direction: column;
 }
+
+
+.products{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr  ;
+}
+
 img{
   height: 100px;
   width: 100px;
@@ -18,3 +24,4 @@ img{
   display: flex;
 
 }
+
