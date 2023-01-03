@@ -44,7 +44,7 @@ const removeItem = (req, res) => {
 
  
 
-  const query = `update cart  SET quantity = CASE WHEN (quantity > 0) then  quantity-1 else 0  end where BuyerId=? AND  productId=?   `;
+  const query = `update cart  SET quantity = CASE WHEN (quantity > 0) then  quantity-1 else 0  end where BuyerId=? AND  productId=? `;
 
   const data = [userId, productId];
 

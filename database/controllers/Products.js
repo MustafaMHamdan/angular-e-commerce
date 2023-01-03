@@ -22,6 +22,8 @@ const addProduct = (req, res) => {
   });
 };
 
+/* ************* getAllProducts ***********/
+
 const getAllProducts = (req, res) => {
   const query = "select * from products where is_deleted =0 ";
 
@@ -47,6 +49,8 @@ const getAllProducts = (req, res) => {
   });
 };
 
+/* ********getProductById******** */
+
 const getProductById = (req, res) => {
   const id = req.params.id;
   const query = "select * from products where productID=? AND is_deleted =0 ";
@@ -69,6 +73,82 @@ const getProductById = (req, res) => {
       return res.status(404).json({
         success: false,
         massage: "there is no product",
+      });
+    }
+  });
+};
+
+/* ************************* delete product */
+
+const deleteProduct = (req, res) => {
+  const id = req.params.id;
+
+  const query = `UPDATE products SET is_deleted=1  where productID=?;`;
+
+  const data = [id];
+
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        massage: "Server Error",
+        err: err,
+      });
+    }
+    if (!result.changedRows) {
+      return res.status(404).json({
+        success: false,
+        massage: `The Product: ${id} is not found`,
+        err: err,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      massage: `Succeeded to delete project with id: ${id}`,
+      result: result,
+    });
+  });
+};
+
+/* ************************* edit product */
+
+const updateProduct = (req, res) => {
+  const { title, price, image } = req.body;
+  const id = req.params.id;
+
+  const query = `SELECT * FROM products WHERE productID=?;`;
+  const data = [id];
+
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      return res.status(404).json({
+        success: false,
+        massage: `Server error`,
+        err: err.message,
+      });
+    }
+    if (!result) {
+      res.status(404).json({
+        success: false,
+        massage: `The Product: ${id} is not found`,
+        err: err,
+      });
+    } else {
+      const query = `UPDATE articles SET title=?, price=? image=? WHERE id=?;`;
+      const data = [
+        title || result[0].title,
+        price || result[0].price,
+        image || result[0].image,
+        id,
+      ];
+
+      connection.query(query, data, (err, result) => {
+        if (result.affectedRows != 0)
+          res.status(201).json({
+            success: true,
+            massage: `Product updated`,
+            result: result,
+          });
       });
     }
   });
@@ -134,4 +214,6 @@ module.exports = {
   getProductById,
   addToCart,
   addProduct,
+  deleteProduct,
+  updateProduct
 };
