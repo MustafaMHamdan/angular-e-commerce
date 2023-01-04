@@ -1,27 +1,30 @@
 <div class="container">
 
+  <div class="cartProducts">
   <div class="item" *ngFor="let product of cartProducts">
-  <img src={{product.image}} />
-  <br>
-  <p>{{product.title}}</p>
+    <img src="{{ product.image }}" />
+    <br />
+    <p>{{ product.title }}</p>
 
-  <p>{{product.price}}</p>
-  <p>Quantity:{{product.quantity }}</p>
+    <p>{{ product.price }}</p>
+    <p>Quantity:{{ product.quantity }}</p>
 
-  <button class="btn btn-danger"  >Remove from Cart</button>
+    <button class="btn btn-danger">Remove from Cart</button>
 
-
-  <div class="addToCart">
-
-    <button>+</button>Quantity    <button class="btn btn-primary" (click)="removeFromCard(product.productId)">-</button>
+    <div class="addToCart">
+      <button>+</button>Quantity
+      <button
+        class="btn btn-primary"
+        (click)="removeFromCard(product.productId)"
+      >
+        -
+      </button>
     </div>
   </div>
 
 
-
-
-
-
-
-
   </div>
+
+  <h2>Subtotal :{{subtotal}}</h2>
+  <button class="btn btn-primary" routerLink="/order">Check Out</button>
+</div>

@@ -21,7 +21,7 @@ const appRoutes:Routes=[
 {path:"cart",component:CartComponent },
 {path:"login",component:SignInComponent },
 {path:"signup",component:SignUpComponent },
-
+{path:"order",component:OrdersComponent }
 ]
   @NgModule({
   declarations: [
