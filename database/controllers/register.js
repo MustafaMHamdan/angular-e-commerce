@@ -1,15 +1,15 @@
 const connection = require("../models/db");
 
-const bcrypt = require("bcrypt");
+/* const bcrypt = require("bcrypt"); */
 const saltRounds = 10;
 
 const register = async (req, res) => {
   const { userName, phone, email, password ,role_id} = req.body;
 
-  const encryptedPassword = await bcrypt.hash(password, saltRounds);
+  /* const encryptedPassword = await bcrypt.hash(password, saltRounds); */
 
   const query = `INSERT INTO users (userName,phone, email ,password,role_id) VALUES (?,?,?,?,?)`;
-  const data = [userName, phone, email, encryptedPassword,role_id];
+  const data = [userName, phone, email, password,role_id];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(409).json({

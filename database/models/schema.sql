@@ -1,8 +1,8 @@
-DROP DATABASE angular_Cart;
+DROP DATABASE angular_cart;
 
-CREATE DATABASE angular_Cart;
+CREATE DATABASE angular_cart;
 
-USE angular_Cart;
+USE angular_cart;
 
 CREATE TABLE roles (
     id INT AUTO_INCREMENT NOT NULL,
@@ -33,13 +33,39 @@ CREATE TABLE products (
     PRIMARY KEY (productID)
 );
 
+CREATE TABLE orders (
+    orderId INT AUTO_INCREMENT NOT NULL,
+    total FLOAT DEFAULT 0,
+    BuyerId INT,
+    FOREIGN KEY (BuyerId) REFERENCES users(UserID),
+    is_deleted TINYINT DEFAULT 0,
+    is_approved TINYINT DEFAULT 0,
+    
+    PRIMARY KEY (orderId)
+);
+/* 
+CREATE TABLE order_details (
+    order_detail_id INT AUTO_INCREMENT NOT NULL,
+    order_id INT,
+    BuyerId INT,
+    productId INT,
+    FOREIGN KEY (BuyerId) REFERENCES users(UserID),
+    FOREIGN KEY (productId) REFERENCES products(productID),
+    FOREIGN KEY (order_id) REFERENCES orders(orderId),
+    quantity int,
+    PRIMARY KEY (order_detail_id),
+    is_deleted TINYINT DEFAULT 0
+); */
+
 CREATE TABLE cart(
     cart_id INT AUTO_INCREMENT NOT NULL,
     BuyerId INT,
     productId INT,
+    order_Id INT,
     quantity INT DEFAULT 1,
     FOREIGN KEY (BuyerId) REFERENCES users(UserID),
     FOREIGN KEY (productId) REFERENCES products(productID),
+    FOREIGN KEY (order_Id) REFERENCES orders(orderId),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (cart_id)
 );
@@ -58,8 +84,6 @@ CREATE TABLE role_permission (
     FOREIGN KEY (permission_id) REFERENCES permissions (id),
     PRIMARY KEY (id)
 );
-
- 
 
 INSERT INTO
     products (

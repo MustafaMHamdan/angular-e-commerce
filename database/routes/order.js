@@ -3,12 +3,12 @@ const express = require("express");
 const authentication = require("../middleware/authentication");
 
  
-const { create_order ,getOrderById ,allOrders} = require("../controllers/order");
+const { checkOrder ,getOrderById ,allOrders,submitOrder} = require("../controllers/order");
 
 const orderRouter = express.Router();
 
-orderRouter.post("/",authentication, create_order);
+orderRouter.post("/",authentication, checkOrder);
 orderRouter.get("/:id",authentication, getOrderById);
 orderRouter.get("/",authentication, allOrders);
- 
-module.exports = orderRouter;
+ orderRouter.delete("/:id",authentication,submitOrder)//
+ module.exports = orderRouter;
