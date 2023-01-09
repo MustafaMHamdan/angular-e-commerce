@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
@@ -11,8 +11,13 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent {
-  constructor(public _HttpClient: HttpClient, public dialog: MatDialog) {}
 
+
+
+
+  constructor(public _HttpClient: HttpClient, public dialog: MatDialog,amount: ElementRef<HTMLInputElement>) {}
+
+amount:number=0
   allProducts: any = [];
   Products: any = [];
   counter: number = 0;
@@ -69,7 +74,7 @@ editDialog(id:any):void{
     this._HttpClient
       .post(
         `http://localhost:5000/products/${id}`,
-        {},
+        {amount:this.amount},
         {
           headers: {
             Authorization: `Bearer ${this.token}`,
@@ -89,8 +94,8 @@ editDialog(id:any):void{
   }
 
 
-
   ngOnInit() {
+
     this.getProducts();
   }
 }

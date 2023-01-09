@@ -1,18 +1,18 @@
 <div class="cart_container">
   <div class="cartProducts">
-    <div class="cart-item" *ngFor="let product of cartProducts">
-      <img class="cart-img" src="{{ product.image }}" />
+    <div class="cart-item" *ngFor="let cartProduct of cartProducts">
+      <img class="cart-img" src="{{ cartProduct.image }}" />
       <br />
       <div class="cart-details">
-        <p>{{ product.title }}</p>
+        <p>{{ cartProduct.title }}</p>
 
-        <p>{{ product.price | currency }}</p>
+        <p>{{ cartProduct.price | currency }}</p>
       </div>
 
       <div class="addToCart">
-        <button class="btn"  (click)="addToCard(product.productId)"><i class="fa fa-plus"></i></button>
-        <p>{{ product.quantity }}</p>
-        <button class="btn" (click)="removeFromCard(product.productId)">
+        <button class="btn"  (click)="addToCard(cartProduct.productId)"><i class="fa fa-plus"></i></button>
+        <p>{{ cartProduct.quantity }}</p>
+        <button class="btn" (click)="removeFromCard(cartProduct.productId)">
           <i class="fa fa-minus"></i>
         </button>
       </div>

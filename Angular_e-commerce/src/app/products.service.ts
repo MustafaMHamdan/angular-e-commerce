@@ -9,7 +9,7 @@ export class ProductsService {
   constructor(public _HttpClient: HttpClient) { }
   AllProducts:any
   product:any
-  
+
   getProducts() {
     this._HttpClient.get(`http://localhost:5000/products`).subscribe((data) => {
       this.AllProducts = data;

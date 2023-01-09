@@ -2,7 +2,7 @@ const connection = require("../models/db");
 
 const showCartProducts = (req, res) => {
   const userId = req.token.userId;
-   const query =
+  const query =
     "select cart_id,image,price ,quantity ,title ,cart.productId from cart inner join products on  cart.productId=products.productID where  cart.BuyerId=? AND cart.quantity>0 AND cart.is_deleted=0";
 
   const data = [userId];
@@ -39,84 +39,61 @@ const showCartProducts = (req, res) => {
 };
 
 const addToCart = (req, res) => {
-  let amount = 1;
-  const product_id = req.params.product_id;
-  const user_id = req.token.userId;
+  const id = req.params.id;
+  const userId = req.token.userId;
 
-  const query = `SELECT * FROM cart WHERE productId=? AND BuyerId=? AND is_deleted = 0 `;
-  const data = [product_id, user_id];
+  const query = `select * from cart where productId=? AND BuyerId=? And is_deleted =0`;
+  const data = [id, userId];
 
   connection.query(query, data, (err, result) => {
-    if (result.length) {
-      result[0].quantity = amount + result[0].quantity;
-      const query = `UPDATE cart SET quantity=? WHERE productId=?  `;
-      const data = [result[0].quantity, result[0].productId];
-      connection.query(query, data, (err, results) => {
-        if (results.affectedRows != 0) {
+    console.log(result);
+    if (result.length > 0) {
+      const query4 = `update cart SET quantity =quantity+1 where productId=? AND BuyerId=? AND is_deleted =0 `;
+      const data4 = [id, userId];
+
+      connection.query(query4, data4, (err, result3) => {
+        if (result3) {
           return res.status(201).json({
-            success: true,
-            massage: `Product Amount Updated +1`,
-            result: results,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            massage: "Server error",
-            err: err,
+            message: "quantity updated",
           });
         }
       });
     } else {
-     
-      const query = `INSERT INTO cart (productId ,BuyerId) VALUES (?,?);`;
-      const data = [product_id, user_id];
-      connection.query(query, data, (err, result) => {
+      const query2 = `insert into cart (BuyerId,productId  ) VALUES (?,?,?)`;
+      const data2 = [userId, id];
+
+      connection.query(query2, data2, (err, res2) => {
         if (err) {
-          res.status(500).json({
+          return res.status(500).json({
             success: false,
-            massage: "Server error",
-            err: err,
+            err: err.message,
           });
         }
-        res.status(200).json({
-          success: true,
-          massage: `Product Added to Cart`,
-          result: result,
-        });
+        if (res2) {
+          return res.status(201).json({
+            success: true,
+            massage: "the product has been added to cart successfully",
+            result: res2,
+          });
+        }
       });
     }
   });
 };
-
 const removeItem = (req, res) => {
-  let amount = 1;
-  const product_id = req.params.product_id;
+  const id = req.params.id;
   const user_id = req.token.userId;
 
   const query = `SELECT * FROM cart WHERE productId=? AND BuyerId=? AND is_deleted=0`;
-  const data = [product_id, user_id];
+  const data = [id, user_id];
 
   connection.query(query, data, (err, result) => {
     if (result.length) {
-      result[0].quantity = result[0].quantity - amount;
-      const query = `UPDATE cart SET quantity=? WHERE productId=? AND is_deleted=0 `;
-      const data = [result[0].quantity, result[0].productId];
-      connection.query(query, data, (err, results) => {
-        if (result[0].quantity === 0) {
-          const product_id = req.params.product_id;
+      const query = `UPDATE cart SET quantity=case when quantity>0 then quantity-1 else  0 end WHERE productId = ?;`;
+      const data = [id];
 
-          const query = `UPDATE cart SET is_deleted = 1 WHERE productId = ?;`;
-          const data = [product_id];
-          connection.query(query, data, (err, results) => {
-            if (err) {
-              return res.status(500).json({
-                success: false,
-                massage: "Server error",
-                err: err,
-              });
-            }
-          });
-        }
+      connection.query(query, data, (err, results) => {
+      
         if (results.affectedRows != 0) {
           return res.status(201).json({
             success: true,
@@ -131,6 +108,8 @@ const removeItem = (req, res) => {
           });
         }
       });
+    
+       
     }
   });
 };

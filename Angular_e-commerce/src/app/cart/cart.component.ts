@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent {
 
   token: any = localStorage.getItem('token');
 
-  getCartItems() {
+   getCartItems() {
     this._HttpClient
       .get(`http://localhost:5000/cart`, {
         headers: {
@@ -31,11 +32,11 @@ export class CartComponent {
       });
   }
 
-
-  addToCard(id: any) {
-    this._HttpClient
+    addToCard=async (id: any) =>{
+            this._HttpClient
       .post(
-        `http://localhost:5000/cart/${id}`,{},
+        `http://localhost:5000/cart/${id}`,
+        {},
 
         {
           headers: {
@@ -53,14 +54,10 @@ export class CartComponent {
         complete: () => console.info('complete'),
       });
 
-    this.getCartItems();
+   await this.getCartItems();
   }
 
-
-
-
-
-  removeFromCard(id: any) {
+  removeFromCard=async (id: any) => {
     this._HttpClient
       .delete(
         `http://localhost:5000/cart/${id}`,
@@ -81,10 +78,10 @@ export class CartComponent {
         complete: () => console.info('complete'),
       });
 
-    this.getCartItems();
+   await this.getCartItems();
   }
 
   ngOnInit() {
-    this.getCartItems();
+       this.getCartItems();
   }
 }

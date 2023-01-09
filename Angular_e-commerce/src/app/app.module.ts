@@ -16,6 +16,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { CartserviceService } from './cartservice.service';
 
 const appRoutes:Routes=[
 {path:"products",component:ProductsComponent },
@@ -44,7 +45,7 @@ const appRoutes:Routes=[
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard,CartserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

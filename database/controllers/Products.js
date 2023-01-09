@@ -85,7 +85,7 @@ const deleteProduct = (req, res) => {
   const userId = req.token.userId;
   const query = `UPDATE products SET is_deleted=1  where productID=? AND SellerId=? ;`;
 
-  const data = [id,userId];
+  const data = [id, userId];
 
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -118,7 +118,7 @@ const updateProduct = (req, res) => {
   const userId = req.token.userId;
 
   const query = `SELECT * FROM products WHERE productID=? AND SellerId=?;`;
-  const data = [id,userId];
+  const data = [id, userId];
 
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -134,7 +134,8 @@ const updateProduct = (req, res) => {
         massage: `The Product: ${id} is not found`,
         err: err,
       });
-    } else { console.log(result);
+    } else {
+      console.log(result);
       const query2 = `UPDATE products SET title=?, price=?, image=? WHERE productID=?;`;
       const data2 = [
         title || result[0].title,
@@ -145,8 +146,8 @@ const updateProduct = (req, res) => {
 
       connection.query(query2, data2, (err, result2) => {
         console.log(result2);
-        if (result2.affectedRows!=0 )
-         return res.status(201).json({
+        if (result2.affectedRows != 0)
+          return res.status(201).json({
             success: true,
             massage: `Product updated`,
             result: result2,
@@ -159,53 +160,43 @@ const updateProduct = (req, res) => {
 /* addToCart ************************ */
 
 const addToCart = (req, res) => {
+  const amount = req.body.amount;
   const id = req.params.id;
   const userId = req.token.userId;
 
-  const query = `select * from products where productID=? AND is_deleted =0`;
-  const data = [id];
+  const query = `select * from cart where productId=? AND BuyerId=? And is_deleted =0`;
+  const data = [id, userId];
 
   connection.query(query, data, (err, result) => {
-    if (result) {
-      const query3 = `select * from cart where productId=? AND BuyerId=? And is_deleted =0`;
-      const data3 = [id,userId];
+    if (result.length > 0) {
+      const query4 = `update cart SET quantity =? where productId=? AND BuyerId=? AND is_deleted =0 `;
+      const data4 = [result[0].quantity + amount, id, userId];
 
-      connection.query(query3, data3, (err, result2) => {
-        if (result2.length > 0) {
-          console.log(result2);
-          const query4 = `update cart SET quantity = (quantity + 1) where productId=? AND BuyerId=? AND is_deleted =0 `;
-          const data4 = [id,userId];
-
-          connection.query(query4, data4, (err, result3) => {
-            if (result3) {
-              console.log(1);
-            }
-          });
-        } else {
-          const query2 = `insert into cart (BuyerId,productId  ) VALUES (?,?)`;
-          const data2 = [userId, id];
-
-          connection.query(query2, data2, (err, res2) => {
-            if (err) {
-              return res.status(500).json({
-                success: false,
-                err: err.message,
-              });
-            }
-            if (res2) {
-              return res.status(201).json({
-                success: true,
-                massage: "the product has been added to cart successfully",
-                result: res2,
-              });
-            }
+      connection.query(query4, data4, (err, result3) => {
+        if (result3) {
+          return res.status(201).json({
+            message: "quantity updated",
           });
         }
       });
     } else {
-      return res.status(404).json({
-        success: false,
-        massage: "the product is not found",
+      const query2 = `insert into cart (BuyerId,productId ,quantity ) VALUES (?,?,?)`;
+      const data2 = [userId, id, amount];
+
+      connection.query(query2, data2, (err, res2) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            err: err.message,
+          });
+        }
+        if (res2) {
+          return res.status(201).json({
+            success: true,
+            massage: "the product has been added to cart successfully",
+            result: res2,
+          });
+        }
       });
     }
   });
@@ -217,5 +208,5 @@ module.exports = {
   addToCart,
   addProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
 };
