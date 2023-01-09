@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { AuthService } from './auth/auth.service'
+import { AuthGuard } from './auth/auth.guard'
  import { Routes,RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,10 +19,10 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 const appRoutes:Routes=[
 {path:"products",component:ProductsComponent },
-{path:"cart",component:CartComponent },
+{path:"cart",component:CartComponent,canActivate:[AuthGuard] },
 {path:"login",component:SignInComponent },
 {path:"signup",component:SignUpComponent },
-{path:"order",component:OrdersComponent }
+{path:"order",component:OrdersComponent,canActivate:[AuthGuard] }
 ]
   @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ const appRoutes:Routes=[
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

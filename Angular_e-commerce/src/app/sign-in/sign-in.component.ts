@@ -23,6 +23,7 @@ export class SignInComponent {
       next: (v) => {
         (this.token = v), localStorage.setItem('token', this.token.token),localStorage.setItem('role', this.token.result[0].role_id),localStorage.setItem('userId', this.token.result[0].UserID);
         if(this.token != ''){
+          window.location.reload()
           this.route.navigateByUrl('/products')
         }else{
           return ;

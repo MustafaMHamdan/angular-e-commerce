@@ -88,9 +88,7 @@ editDialog(id:any):void{
     this.counter++;
   }
 
-  addNewProduct() {
-    console.log(5);
-  }
+
 
   ngOnInit() {
     this.getProducts();

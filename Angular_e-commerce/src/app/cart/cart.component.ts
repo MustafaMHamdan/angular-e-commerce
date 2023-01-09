@@ -11,7 +11,7 @@ export class CartComponent {
 
   allCartProducts: any = [];
   cartProducts: any = [];
-  subtotal: Number =0;
+  subtotal: Number = 0;
 
   token: any = localStorage.getItem('token');
 
@@ -27,15 +27,44 @@ export class CartComponent {
         console.log(data);
 
         this.cartProducts = this.allCartProducts.cartProducts;
-        this.subtotal=this.allCartProducts.total
+        this.subtotal = this.allCartProducts.total;
       });
   }
 
+
+  addToCard(id: any) {
+    this._HttpClient
+      .post(
+        `http://localhost:5000/cart/${id}`,{},
+
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      )
+      .subscribe({
+        next: (v) => {
+          console.log(v);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+        complete: () => console.info('complete'),
+      });
+
+    this.getCartItems();
+  }
+
+
+
+
+
   removeFromCard(id: any) {
     this._HttpClient
-      .put(
+      .delete(
         `http://localhost:5000/cart/${id}`,
-        {},
+
         {
           headers: {
             Authorization: `Bearer ${this.token}`,
