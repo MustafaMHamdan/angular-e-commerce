@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  constructor(public _HttpClient: HttpClient) {}
+  constructor(public _HttpClient: HttpClient, private router: Router) {}
 
   allCartProducts: any = [];
   cartProducts: any = [];
@@ -16,7 +17,7 @@ export class CartComponent {
 
   token: any = localStorage.getItem('token');
 
-   getCartItems() {
+  getCartItems() {
     this._HttpClient
       .get(`http://localhost:5000/cart`, {
         headers: {
@@ -32,8 +33,8 @@ export class CartComponent {
       });
   }
 
-    addToCard=async (id: any) =>{
-            this._HttpClient
+  addToCard = (id: any) => {
+    this._HttpClient
       .post(
         `http://localhost:5000/cart/${id}`,
         {},
@@ -54,10 +55,14 @@ export class CartComponent {
         complete: () => console.info('complete'),
       });
 
-   await this.getCartItems();
-  }
+    this.getCartItems();
+    window.location.reload();
+    /*    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['cart']);
+}); */
+  };
 
-  removeFromCard=async (id: any) => {
+  removeFromCard = (id: any) => {
     this._HttpClient
       .delete(
         `http://localhost:5000/cart/${id}`,
@@ -78,10 +83,39 @@ export class CartComponent {
         complete: () => console.info('complete'),
       });
 
-   await this.getCartItems();
-  }
+    this.getCartItems();
+    window.location.reload();
+  };
+
+  removeAllFromCard = (id: any) => {
+    this._HttpClient
+      .put(
+        `http://localhost:5000/cart/${id}`,
+{},
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      )
+      .subscribe({
+        next: (v) => {
+          console.log(v);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+        complete: () => console.info('complete'),
+      });
+
+    this.getCartItems();
+    window.location.reload();
+  };
+
+
+
 
   ngOnInit() {
-       this.getCartItems();
+    this.getCartItems();
   }
 }

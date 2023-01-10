@@ -10,9 +10,14 @@ export class CartserviceService {
 
   AllCartProducts:any
   cartProduct:any
+    token: any = localStorage.getItem('token');
 
-  getProducts() {
-    return this._HttpClient.get(`http://localhost:5000/cart`)
+  getCartProducts() {
+    return this._HttpClient.get(`http://localhost:5000/cart`,{
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    }   )
     ;
   }
 

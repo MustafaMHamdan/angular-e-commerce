@@ -115,10 +115,11 @@ const removeItem = (req, res) => {
 };
 
 const emptyCart = (req, res) => {
+  const id = req.params.id;
   const user_id = req.token.userId;
-  const query = `UPDATE cart SET is_deleted=1 
-    WHERE BuyerId=?;`;
-  const data = [user_id];
+  const query = `UPDATE cart SET quantity=0
+    WHERE BuyerId=? AND productId=? ;`;
+  const data = [user_id,id];
   connection.query(query, data, (error, result) => {
     console.log(error);
     if (error) {

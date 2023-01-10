@@ -15,10 +15,15 @@
         <button class="btn" (click)="removeFromCard(cartProduct.productId)">
           <i class="fa fa-minus"></i>
         </button>
+
+
       </div>
+      <button class="btn" (click)="removeAllFromCard(cartProduct.productId)">
+        <i class="fa fa-trash"></i>
+      </button>
     </div>
   </div>
-
-  <h2>Subtotal :{{ subtotal }}</h2>
-  <button class="btn btn-primary" routerLink="/order">Check Out</button>
+  <h2 *ngIf="cartProducts.length==0">Your Cart Is Empty</h2>
+  <h2  *ngIf="cartProducts.length!=0" >Subtotal :{{ subtotal }}</h2>
+  <button *ngIf="cartProducts.length!=0"      class="btn btn-primary" routerLink="/order">Check Out</button>
 </div>

@@ -12,5 +12,5 @@ const authentication = require("../middleware/authentication");
 cartRouter.get("/",authentication, showCartProducts);
 cartRouter.post("/:id",authentication, addToCart);
 cartRouter.delete("/:id",authentication, removeItem);
-cartRouter.delete("/",authentication, emptyCart);
+cartRouter.put("/:id",authentication, emptyCart);
 module.exports = cartRouter;

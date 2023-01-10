@@ -15,13 +15,13 @@
 
       <div class="addToCart">
         <div class="product-btn" *ngIf="role == 2">
-          <button
+           <input class="input-cas" [(ngModel)]="product.counter" type="number" min="1">
 
-            (click)="addToCard(product.productID)"
+          <button class="btn btn-primary"
+
+            (click)="addToCard(product.productID,product.counter)"
           >
-          Add to Cart</button
-          > <input [(ngModel)]="amount" type="number" >
-          {{amount}}
+          Add to Cart</button>
         </div>
 
         <div
