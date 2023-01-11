@@ -37,6 +37,7 @@ CREATE TABLE orders (
     orderId INT AUTO_INCREMENT NOT NULL,
     total FLOAT DEFAULT 0,
     BuyerId INT,
+    Orderdate date DEFAULT (CURRENT_TIMESTAMP),
     FOREIGN KEY (BuyerId) REFERENCES users(UserID),
     is_deleted TINYINT DEFAULT 0,
     is_approved TINYINT DEFAULT 0,
