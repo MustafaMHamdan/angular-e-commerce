@@ -13,8 +13,8 @@ export class CartComponent {
 
   allCartProducts: any = [];
   cartProducts: any = [];
-  subtotal: Number = 0;
-
+  subtotal: number = 0;
+total:number=0
   token: any = localStorage.getItem('token');
 
   getCartItems() {
@@ -30,6 +30,8 @@ export class CartComponent {
 
         this.cartProducts = this.allCartProducts.cartProducts;
         this.subtotal = this.allCartProducts.total;
+        this.total=this.allCartProducts.total_quantity
+
       });
   }
 

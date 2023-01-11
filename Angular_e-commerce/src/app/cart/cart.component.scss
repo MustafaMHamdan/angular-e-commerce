@@ -4,22 +4,27 @@
 }
 
 .cart_container {
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
 }
 
 .cartProducts {
+  border: solid  #2CACB7;
+  border-radius: 5px;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
 
   justify-items: center;
   align-items: center;
+
 }
 
 .cart-item {
   background-color: #f8f9fa;
 
-  border: 1px solid #0d6efd;
+  border: 1px solid  rgb(204,218,35);     //
   border-radius: 10px;
   display: flex;
   width: 25vh;
@@ -50,5 +55,9 @@
 }
 
 button {
+  margin: 1vh;
+}
+
+.order{
   margin: 1vh;
 }

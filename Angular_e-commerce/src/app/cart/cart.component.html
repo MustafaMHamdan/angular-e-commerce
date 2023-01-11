@@ -1,4 +1,9 @@
 <div class="cart_container">
+  <h2 *ngIf="cartProducts.length != 0">
+    Your BLU<span style="color: #4eb9cb">LOGIX</span> Cart
+  </h2>
+  <hr />
+
   <div class="cartProducts">
     <div class="cart-item" *ngFor="let cartProduct of cartProducts">
       <img class="cart-img" src="{{ cartProduct.image }}" />
@@ -10,20 +15,30 @@
       </div>
 
       <div class="addToCart">
-        <button class="btn"  (click)="addToCard(cartProduct.productId)"><i class="fa fa-plus"></i></button>
+        <button class="btn" (click)="addToCard(cartProduct.productId)">
+          <i class="fa fa-plus"></i>
+        </button>
         <p>{{ cartProduct.quantity }}</p>
         <button class="btn" (click)="removeFromCard(cartProduct.productId)">
           <i class="fa fa-minus"></i>
         </button>
-
-
       </div>
       <button class="btn" (click)="removeAllFromCard(cartProduct.productId)">
         <i class="fa fa-trash"></i>
       </button>
     </div>
   </div>
-  <h2 *ngIf="cartProducts.length==0">Your Cart Is Empty</h2>
-  <h2  *ngIf="cartProducts.length!=0" >Subtotal :{{ subtotal }}</h2>
-  <button *ngIf="cartProducts.length!=0"      class="btn btn-primary" routerLink="/order">Check Out</button>
+<div class="order">
+  <h2 *ngIf="cartProducts.length == 0">
+    Your BLU<span style="color: #4eb9cb">LOGIX</span> Cart is empty
+  </h2>
+  <h2 *ngIf="cartProducts.length != 0">Subtotal({{total}})items :{{ subtotal | currency}}</h2>
+  <button
+    *ngIf="cartProducts.length != 0"
+    class="btn btn-primary"
+    routerLink="/order"
+  >
+    Check Out
+  </button>
+</div>
 </div>

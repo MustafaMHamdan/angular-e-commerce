@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { CartserviceService } from './cartservice.service';
+import { PastOrdersComponent } from './past-orders/past-orders.component';
 
 const appRoutes:Routes=[
 {path:"products",component:ProductsComponent },
@@ -37,6 +38,7 @@ const appRoutes:Routes=[
     ProductDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
+    PastOrdersComponent,
 
    ],
   imports: [

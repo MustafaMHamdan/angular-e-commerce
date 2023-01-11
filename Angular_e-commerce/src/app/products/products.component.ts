@@ -31,6 +31,7 @@ export class ProductsComponent {
 
     this.dialog.open(ProductDialogComponent, {
       width: '250px',
+      height: '250px'
     });
     this.dialog.afterAllClosed.subscribe(() => {
       this.getProducts();

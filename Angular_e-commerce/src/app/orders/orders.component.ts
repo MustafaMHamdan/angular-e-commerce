@@ -32,12 +32,27 @@ export class OrdersComponent {
         this.total = this.tax + this.subtotal;
       });
   }
-submitOrder(){
+
+  submitOrder() {
 
 
-}
-
-
+    this._HttpClient
+      .delete(`http://localhost:5000/orders`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      })
+      .subscribe({
+        next: (v) => {
+          console.log(v);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+        complete: () => console.info('complete'),
+      });
+      window.location.reload();
+  }
 
   ngOnInit() {
     this.getCartItems();
