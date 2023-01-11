@@ -24,7 +24,8 @@ const appRoutes:Routes=[
 {path:"cart",component:CartComponent,canActivate:[AuthGuard] },
 {path:"login",component:SignInComponent },
 {path:"signup",component:SignUpComponent },
-{path:"order",component:OrdersComponent,canActivate:[AuthGuard] }
+{path:"order",component:OrdersComponent,canActivate:[AuthGuard] },
+{path:"orders-history",component:PastOrdersComponent,canActivate:[AuthGuard] },
 ]
   @NgModule({
   declarations: [
