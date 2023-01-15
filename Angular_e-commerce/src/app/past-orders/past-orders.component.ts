@@ -11,11 +11,14 @@ export class PastOrdersComponent {
 
   token: any = localStorage.getItem('token');
 
-  allCartProducts: any = [];
+  allOrders: any;
+  allPastOrders = [];
+  y = [];
+  x: any = [];
   cartProducts: any = [];
   subtotal: number = 0;
   total: number = 0;
-
+ myBill :any = [];
   getAllOrders() {
     this._HttpClient
       .get(`http://localhost:5000/orders`, {
@@ -24,12 +27,48 @@ export class PastOrdersComponent {
         },
       })
       .subscribe((data) => {
-        console.log(data);
+        this.allOrders = data;
+   this.allPastOrders=this.allOrders.result;
+this.myBill =this.allOrders.bill;
+
+console.log(this.myBill);
+
+const B= Object.assign({}, ...this.myBill);
+
+console.log(B);
+
+
+
+      /*   const result = Object.values(
+          this.allPastOrders.reduce((res: any, obj: any) => {
+            res[obj.order_id] = res[obj.order_id] || [
+              {
+                order_id: obj.order_id,
+                userName: obj.userName,
+                phone: obj.phone,
+                email: obj.email,
+              },
+
+              (this.y = this.allPastOrders.filter((element) => {
+                return element['order_id'] == obj.order_id;
+              })),
+              (this.x = this.y.map((ele) => {
+                return [{ title: ele['title'] }, { quantity: ele['quantity'] },{ price: ele['price'] }];
+              })),
+            ];
+
+            return res;
+          }, [])
+        ); */
+
+
+
+
       });
+
   }
 
-  ngOnInit(){
-
-    this.getAllOrders()
+  ngOnInit() {
+    this.getAllOrders();
   }
 }

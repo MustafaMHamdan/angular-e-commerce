@@ -1,38 +1,25 @@
 import { Component } from '@angular/core';
-import { MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-dialog',
   templateUrl: './product-dialog.component.html',
-  styleUrls: ['./product-dialog.component.scss']
+  styleUrls: ['./product-dialog.component.scss'],
 })
 export class ProductDialogComponent {
-  constructor(public dialogRef: MatDialogRef<ProductDialogComponent>,public _HttpClient: HttpClient,) {}
+  constructor(
+    private api: ProductsService,
+    public dialogRef: MatDialogRef<ProductDialogComponent>
+  ) {}
 
   token: any = localStorage.getItem('token');
 
-
-
-
-  addNewProduct(form: NgForm){
-    this._HttpClient
-    .post(`http://localhost:5000/products`, form,  {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    })
-    .subscribe({
-      next: (v) => {console.log(v);
-      } ,
-      error: (e) => {console.log(e);
-      },
-      complete: () => console.info('complete')
-  } );
-
-
+  addNewProduct(form: NgForm) {
+    this.api.addToProduct(form).subscribe((res) => {
+      console.log(res);
+    });
   }
-
-
 }

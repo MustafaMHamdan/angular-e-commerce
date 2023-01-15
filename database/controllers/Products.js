@@ -1,11 +1,11 @@
 const connection = require("../models/db");
 
 const addProduct = (req, res) => {
-  const { title, price, image } = req.body;
+  const { title, price, image ,category} = req.body;
   SellerId = req.token.userId;
 
-  const query = `INSERT INTO products (title,price, image ,SellerId) VALUES (?,?,?,?)`;
-  const data = [title, price, image, SellerId];
+  const query = `INSERT INTO products (title,price, image ,category,SellerId) VALUES (?,?,?,?,?)`;
+  const data = [title, price, image,category,SellerId];
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.status(409).json({
@@ -113,7 +113,7 @@ const deleteProduct = (req, res) => {
 /* ************************* edit product */
 
 const updateProduct = (req, res) => {
-  const { title, price, image } = req.body;
+  const { title, price, image,category } = req.body;
   const id = req.params.id;
   const userId = req.token.userId;
 
@@ -136,11 +136,12 @@ const updateProduct = (req, res) => {
       });
     } else {
       console.log(result);
-      const query2 = `UPDATE products SET title=?, price=?, image=? WHERE productID=?;`;
+      const query2 = `UPDATE products SET title=?, price=?, image=? ,category=? WHERE productID=?;`;
       const data2 = [
         title || result[0].title,
         price || result[0].price,
         image || result[0].image,
+        category || result[0].category,
         id,
       ];
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -8,16 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent {
+export class SignInComponent implements AfterViewInit {
   constructor(public _HttpClient: HttpClient,
     private  route : Router) {}
-
+    @ViewChild('email') emailF! :ElementRef<HTMLInputElement>
   msg: any = '';
   errorMsg: any = '';
   massage: any ='';
   token: any = '';
 
-
+    ngAfterViewInit(){
+      this.emailF.nativeElement.focus()
+    }
   signIn(form: NgForm) {
     this._HttpClient.post(`http://localhost:5000/login`, form).subscribe({
       next: (v) => {

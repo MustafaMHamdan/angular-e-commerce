@@ -17,9 +17,12 @@ export class EditDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public _HttpClient: HttpClient
   ) {}
-  editProduct(form: NgForm) {
+  editProduct() {
     this._HttpClient
-      .put(`http://localhost:5000/products/${this.data}`, form, {
+      .put(`http://localhost:5000/products/${this.data.id}`, {
+title:this.data.title,price:this.data.price,image:this.data.image,category:this.data.category
+
+      }, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },

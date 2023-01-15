@@ -1,1 +1,20 @@
-<p>past-orders works!</p>
+ <div *ngFor="let order of allPastOrders">
+<div>
+<p>userName :{{order[0]['userName']}}</p>
+<p>Email : {{order[0]['email']}}</p>
+<p>Phone : {{order[0]['phone']}}</p>
+
+
+</div>
+
+<div *ngFor="let bill of myBill">
+<p> Title :{{bill[0]['title']}} </p>
+<p> Quantity :{{bill[0][1]['quantity']}}</p>
+<p> price :{{bill[0][1]['price']}}</p>
+
+</div>
+
+
+<hr>
+
+ </div>

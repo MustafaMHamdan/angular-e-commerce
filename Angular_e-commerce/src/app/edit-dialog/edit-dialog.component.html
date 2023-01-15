@@ -1,19 +1,43 @@
-<h1 mat-dialog-title>Add New Product</h1>
-<div mat-dialog-content>
+
+<div class="container-header d-flex ">
+  <h1 mat-dialog-title>Update Product</h1>
+  <div mat-dialog-actions>
+
+    <button
+      mat-button
+      mat-dialog-close
+      class="btn"
+      style="background-color: red; color: white"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>
+
+<div mat-dialog-content class="f">
   <form
     class="signIn-form"
-    (ngSubmit)="editProduct(editedProduct.value)"
+    (ngSubmit)="editProduct()"
     #editedProduct="ngForm"
   >
     <br />
     <label for="title">Title</label>
-    <input id="title" ngModel name="title" type="text" />
+    <input class="form-control" id="title"  [(ngModel)]="data.title" name="title" type="text" />
     <br />
     <label for="price">Price</label>
-    <input id="price" ngModel name="price" type="text" />
+    <input class="form-control" id="price" [(ngModel)]="data.price" name="price" type="text" />
     <br />
     <label for="image">Image</label>
-    <input id="image" ngModel name="image" type="text" />
+    <input class="form-control" id="image" [(ngModel)]="data.image" name="image" type="text" />
+    <br />
+    <label for="category">Category</label>
+    <select  class="form-control" name="category" id="category"   [(ngModel)]="data.category" name="category">
+
+      <option value="saab">Phone</option>
+      <option value="mercedes">Computer</option>
+      <option value="tablet">Tablet</option>
+    </select>
+    <br />
     <button
       class="btn btn-primary"
       type="submit"
@@ -25,7 +49,4 @@
     </button>
   </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
 
-</div>

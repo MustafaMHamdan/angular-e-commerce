@@ -1,43 +1,119 @@
-<div class="products_container">
-  <button class="btn btn-primary" (click)="openDialog()" *ngIf="role == 1">
+
+
+<div class="card-top container-fluid">
+  <div class="container d-flex">
+    <div class="item">
+      <a (click)="filter('')">
+        <img
+          src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100"
+          alt=""
+        />
+        <h6>All products</h6>
+      </a>
+    </div>
+    <div class="item">
+      <a (click)="filter('computer')">
+        <img
+          src="https://m.media-amazon.com/images/I/71tc7Nl6VKS.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+          alt=""
+        />
+        <h6>computer</h6>
+      </a>
+    </div>
+    <div class="item">
+      <a (click)="filter('tablet')">
+        <img
+          src="https://y-store-media-smartbuy.s3.amazonaws.com/sys-smartbuyb2c/images/h6a/h52/8861312876574/CAV0823ST0003.jpg"
+          alt=""
+        />
+        <h6>Tablet</h6>
+      </a>
+    </div>
+
+    <div class="item">
+      <a (click)="filter('phone')">
+        <img
+          style="width: 62px; margin-top: 5px"
+          src="https://cdn.shopify.com/s/files/1/0385/8490/9956/products/huawei_nova_9_128gb_8gb_black_600x600.jpg?v=1642676730"
+          alt=""
+        />
+        <h6>Phone</h6>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="open-button">
+  <button
+    style="float: right; margin: 15px; border-radius: 50%"
+    class="btn btn-primary"
+    (click)="openDialog('0ms', '0ms')"
+    *ngIf="role == 1"
+  >
     +
   </button>
+</div>
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title'">
+      <div class="card fix-gaps col-md-3">
+        <img src="{{ item.image }}" alt="" />
+<div class="detail">
+        <h5
+          style="
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100ch;
+          "
+        >
+          {{ item.title }}
+        </h5>
 
-  <div class="products">
-    <div   *ngFor="let product of Products" >
-<div  class="product-item" *ngIf="userId == product.SellerId || role == 2 ">
-      <img class="product-img" src="{{ product.image }}"  />
-      <br />
-      <div class="product-details">
-        <p>{{ product.title }}</p>
+        <p><strong>Price:</strong> ${{ item.price }}</p>
 
-        <p>{{ product.price | currency }}</p>
       </div>
+      <div class="cart-btn">
+          <input *ngIf="role == 2"
+            class="input-cas"
+            onKeyDown="return false"
+            [(ngModel)]="item.counter"
+            type="number"
+            min="1"
+          />
 
-      <div class="addToCart">
-        <div class="cart-btn" *ngIf="role == 2">
-           <input class="input-cas" [(ngModel)]="product.counter" type="number" min="1">
-
-          <button class="btn btn-primary"
-
-            (click)="addToCard(product.productID,product.counter)"
+          <button *ngIf="role == 2"
+            class="btn btn-primary"
+            (click)="addToCard(item.productID, item.counter)"
           >
-          Add to Cart</button>
+            Add to Cart
+          </button>
         </div>
 
-        <div
-          class="product-btn"
-          *ngIf="role == 1 && userId == product.SellerId"
-        >
-          <button (click)="deleteDialog(product.productID)" class="btn">
+        <div class="product-btn" *ngIf="role == 1 && userId == item.SellerId">
+          <button
+            (click)="deleteDialog(item.productID, item.title)"
+            class="btn"
+            style="color: red"
+          >
             <i class="fa fa-trash"></i>
           </button>
-          <button (click)="editDialog(product.productID)" class="btn">
+          <button
+            (click)="
+              editDialog(
+                item.productID,
+                item.title,
+                item.price,
+                item.image,
+                item.category
+              )
+            "
+            class="btn"
+          >
             <i class="fa fa-edit"></i>
           </button>
         </div>
       </div>
-    </div>
-  </div>
+    </ng-container>
   </div>
 </div>

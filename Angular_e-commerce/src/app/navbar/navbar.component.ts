@@ -7,29 +7,37 @@ import { CartserviceService } from '../cartservice.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private cartProducts: CartserviceService) {}
-
+  constructor(private cartService: CartserviceService) {}
+  total: number = 0;
   myCarts: any;
+  public searchTerm !: string;
   token: any = localStorage.getItem('token');
-  myCartProducts:[]=[];
-  totalCart:number=0
+  allCartProducts: any = [];
+  totalCart: number = 0;
   signOut() {
     localStorage.clear();
   }
 
-  gitMyCart = () => {
-    this.cartProducts.getCartProducts().subscribe((res) => {
-      this.myCarts = res;
-     this.myCartProducts= this.myCarts.cartProducts
-     console.log(this.myCartProducts);
-    this.totalCart=this.myCarts.total_quantity
+  getCartItems() {
+    return this.cartService.getCartProducts().subscribe((res) => {
+      this.myCarts = res.cartProducts;
 
+      this.total = this.myCarts.reduce((accumulator: number, element: any) => {
+        return accumulator + element.quantity;
+      }, 0);
+
+      this.getCartItems();
     });
-    console.log(this.myCartProducts);
-  };
+  }
+
+  search(event:any){
+    this.searchTerm = (event.target as HTMLInputElement).value;
+console.log(this.searchTerm);
+this.cartService.search.next(this.searchTerm);
+  }
 
   ngOnInit() {
-    this.gitMyCart();
-
+    this.getCartItems();
+    
   }
 }

@@ -18,11 +18,11 @@ export class DeleteDialogComponent {
 
   token: any = localStorage.getItem('token');
 
-  myProduct: any = this.serviceProducts.product;
+
 
   deleteProduct() {
     this._HttpClient
-      .delete(`http://localhost:5000/products/${this.data}`, {
+      .delete(`http://localhost:5000/products/${this.data.id}`, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },

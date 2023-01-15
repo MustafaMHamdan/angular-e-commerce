@@ -1,44 +1,83 @@
-<div class="cart_container">
-  <h2 *ngIf="cartProducts.length != 0">
-    Your BLU<span style="color: #4eb9cb">LOGIX</span> Cart
-  </h2>
-  <hr />
+<ng-container *ngIf="cartProducts.length != 0">
+  <div class="container">
+    <div class="card-table">
+      <div class="cart-product">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Product Name</th>
+              <th>Product Image</th>
 
-  <div class="cartProducts">
-    <div class="cart-item" *ngFor="let cartProduct of cartProducts">
-      <img class="cart-img" src="{{ cartProduct.image }}" />
-      <br />
-      <div class="cart-details">
-        <p>{{ cartProduct.title }}</p>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartProducts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.title }}</td>
+              <td>
+                <img style="width: 120px" src="{{ item.image }}" alt="" />
+              </td>
 
-        <p>{{ cartProduct.price | currency }}</p>
+              <th style="width: 12%">{{ item.price | currency }}</th>
+              <td style="width: 12%">{{ item.quantity }}</td>
+              <td style="width: 12%">
+                {{ item.quantity * item.price | currency }}
+              </td>
+              <td>
+                <button
+                  (click)="addToCard(item.productId, 1)"
+                  class="btn btn-primari"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  (click)="removeFromCard(item.productId)"
+                  class="btn btn-primari"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4"></td>
+
+              <td>
+                <button routerLink="/products" class="btn btn-primary">
+                  Shop More
+                </button>
+              </td>
+              <td><button class="btn btn-success">Checkout</button></td>
+              <td>
+                <strong>Subtotal : ${{ subtotal }}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="addToCart">
-        <button class="btn" (click)="addToCard(cartProduct.productId)">
-          <i class="fa fa-plus"></i>
-        </button>
-        <p>{{ cartProduct.quantity }}</p>
-        <button class="btn" (click)="removeFromCard(cartProduct.productId)">
-          <i class="fa fa-minus"></i>
-        </button>
-      </div>
-      <button class="btn" (click)="removeAllFromCard(cartProduct.productId)">
-        <i class="fa fa-trash"></i>
-      </button>
     </div>
   </div>
-<div class="order">
-  <h2 *ngIf="cartProducts.length == 0">
-    Your BLU<span style="color: #4eb9cb">LOGIX</span> Cart is empty
-  </h2>
-  <h2 *ngIf="cartProducts.length != 0">Subtotal({{total}})items :{{ subtotal | currency}}</h2>
-  <button
-    *ngIf="cartProducts.length != 0"
-    class="btn btn-primary"
-    routerLink="/order"
-  >
-    Check Out
-  </button>
-</div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="cartProducts.length == 0">
+  <div class="container">
+    <div class="card">
+      <h5 class="card-title">My Cart</h5>
+    </div>
+    <div class="center">
+      <img
+        src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+        alt=""
+      />
+      <h4>Your cart is empty!</h4>
+      <h6>Add item to it now</h6>
+      <button routerLink="/products" class="btn btn-primary">Shop Now</button>
+    </div>
+  </div>
+</ng-container>

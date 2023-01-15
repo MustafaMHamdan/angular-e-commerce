@@ -38,7 +38,17 @@ const showCartProducts = (req, res) => {
   });
 };
 
+
+
+
+
+
+
+
+
+
 const addToCart = (req, res) => {
+  const amount = req.body.amount || 1;
   const id = req.params.id;
   const userId = req.token.userId;
 
@@ -46,10 +56,9 @@ const addToCart = (req, res) => {
   const data = [id, userId];
 
   connection.query(query, data, (err, result) => {
-    console.log(result);
     if (result.length > 0) {
-      const query4 = `update cart SET quantity =quantity+1 where productId=? AND BuyerId=? AND is_deleted =0 `;
-      const data4 = [id, userId];
+      const query4 = `update cart SET quantity =? where productId=? AND BuyerId=? AND is_deleted =0 `;
+      const data4 = [result[0].quantity + amount, id, userId];
 
       connection.query(query4, data4, (err, result3) => {
         if (result3) {
@@ -59,8 +68,8 @@ const addToCart = (req, res) => {
         }
       });
     } else {
-      const query2 = `insert into cart (BuyerId,productId  ) VALUES (?,?,?)`;
-      const data2 = [userId, id];
+      const query2 = `insert into cart (BuyerId,productId ,quantity ) VALUES (?,?,?)`;
+      const data2 = [userId, id, amount];
 
       connection.query(query2, data2, (err, res2) => {
         if (err) {

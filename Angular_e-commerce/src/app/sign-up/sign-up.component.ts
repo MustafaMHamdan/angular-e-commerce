@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -7,8 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements AfterViewInit {
   constructor(public _HttpClient: HttpClient,private  route : Router) {}
+
+  @ViewChild('username') userName! :ElementRef<HTMLInputElement>
+  ngAfterViewInit(): void {
+    this.userName.nativeElement.focus()
+  }
   msg: any = '';
   errorMsg: any = '';
   massage: any = {};

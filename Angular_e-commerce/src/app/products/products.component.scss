@@ -1,86 +1,72 @@
-.products_container {
+.card-top {
+  overflow-x: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-
-  justify-items: center;
-  align-items: center;
+.item img {
+  width: 64px;
 }
 
-.product-item {
-  background-color: #f8f9fa;
-
-  border: 2px solid #518de9d5;
-  border-radius: 10px;
-  display: flex;
-  width: 30vh;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px auto;
-  background-color: #f0f0f0;
+.item {
+  margin: 0px 15px;
+  text-align: center;
 }
 
-.product-img {
-  margin: 10px auto;
-  height: 12vh;
-  width: 100%;
+.item a:hover {
+  color: blue;
 }
 
-.product-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  font-weight: bold;
+.card {
+    padding: 20px;
+    margin: 50px;
 }
 
-.product-btn {
-  display: flex;
-  flex-direction: row;
+.card img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
 
-  margin: 2vh;
-}
-
-button {
-  margin: 1vh;
-}
-
-.addToCart {
-  display: flex;
-  flex-direction: row;
-}
-
-.cart-btn {
-  display: flex;
-  flex-direction: column;
+    transition: 0.3s ease-in-out;
 
 }
 
-.but-cas{
-  width: 60%;
-  display: flex;
+.card img:hover {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+.fix-gaps {
+  margin: 45px !important;
+  padding: 10px !important;
   justify-content: center;
   align-items: center;
-  justify-items: center;
-  margin:10px auto;
-  height: 8vh;
-  border-radius: 5px;
-  font-size: medium;
 
 }
 
-.input-cas{
-  height: 10vh;
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  margin: auto;
+.detail{
+margin-right: 60px;
+}
 
-  border-radius: 5px;
+
+.product-btn{
+ display: flex;
+ gap: 15px;
+ margin-right: 70px;
+}
+
+.cart-btn
+{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+ margin: 10px;
+ padding: 10px;
+ gap: 10px;
 }

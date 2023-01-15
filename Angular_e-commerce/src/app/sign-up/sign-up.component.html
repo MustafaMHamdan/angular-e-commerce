@@ -1,28 +1,28 @@
- <div class="container">
+<div class="container">
+  <div class="title">Welcome</div>
+  <div class="subtitle">Let's create your account!</div>
+  <form
+    class="inputs"
+    (ngSubmit)="signUp(signUpform.value)"
+    #signUpform="ngForm"
+  >
+    <label for="username">User Name</label>
+    <input  #username id="userName" ngModel name="userName" />
+    <br />
+    <label for="phone">Phone Number</label>
+    <input id="phone" ngModel name="phone" />
+    <br />
+    <label for="email">Email</label>
+    <input id="email" ngModel name="email" type="email" />
+    <br />
+    <label for="password">Password</label>
+    <input id="password" ngModel name="password" type="password" />
+    <br />
+    <button class="btn btn-primary" type="submit">Sign-Up</button>
+  </form>
+  <div>
+    <p>{{ msg }}</p>
 
-<form class="signUp-form"  (ngSubmit)="signUp(signUpform.value)" #signUpform="ngForm"  >
-
-<label for="username" >User Name</label>
-<input id="userName" ngModel name="userName">
-<br>
-<label for="phone" >Phone Number</label>
-<input id="phone" ngModel name="phone">
-<br>
-<label for="email">Email</label>
-<input id="email" ngModel name="email" type="email">
-<br>
-<label for="password">Password</label>
-<input id="password" ngModel name="password" type="password">
-<br>
-<button class="btn btn-primary"  type="submit">Sign-Up</button>
-
-
-
-</form>
-
-<p >{{msg}}</p>
-
-
-
-
- </div>
+    <a href="/login">Do You have An Account ?Login! </a>
+  </div>
+</div>

@@ -1,21 +1,27 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Router } from '@angular/router';
+
+import { CartserviceService } from '../cartservice.service';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  public productList: any;
+  public filterCategory: any;
+  searchKey: string = '';
+
   constructor(
-    public _HttpClient: HttpClient,
-    public dialog: MatDialog,
-    amount: ElementRef<HTMLInputElement>,private  router : Router
+    private api: ProductsService,
+    private cartService: CartserviceService,
+    public dialog: MatDialog
   ) {}
 
   amount: number = 0;
@@ -26,22 +32,40 @@ export class ProductsComponent {
   role: any = localStorage.getItem('role');
   userId: any = localStorage.getItem('userId');
 
-  openDialog(): void {
-    console.log(this.role);
+  ngOnInit(): void {
+    this.getProducts();
+    this.cartService.search.subscribe((val:any)=>{
+      this.searchKey = val;})
+  }
 
+  filter(category: string) {
+    console.log(this.filterCategory);
+
+    this.filterCategory =  this.allProducts.filter((a: any) => {
+      if (a.category == category || category == '') {
+        return a;
+      }
+    });
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
     this.dialog.open(ProductDialogComponent, {
-      width: '250px',
-      height: '250px'
+      width: '400px',
+      exitAnimationDuration,
+      enterAnimationDuration,
     });
     this.dialog.afterAllClosed.subscribe(() => {
       this.getProducts();
     });
   }
 
-  deleteDialog(id: any): void {
+  deleteDialog(id: any, title: any): void {
     this.dialog.open(DeleteDialogComponent, {
       width: '500px',
-      data: id,
+      data: { id, title },
     });
 
     this.dialog.afterAllClosed.subscribe(() => {
@@ -49,10 +73,16 @@ export class ProductsComponent {
     });
   }
 
-  editDialog(id: any): void {
+  editDialog(id: any, title: any, price: any, image: any, category: any): void {
     this.dialog.open(EditDialogComponent, {
       width: '500px',
-      data: id,
+      data: {
+        id,
+        title,
+        price,
+        image,
+        category,
+      },
     });
 
     this.dialog.afterAllClosed.subscribe(() => {
@@ -61,45 +91,23 @@ export class ProductsComponent {
   }
 
   getProducts() {
-    this._HttpClient.get(`http://localhost:5000/products`).subscribe((data) => {
-      this.allProducts = data;
-      this.allProducts.for;
-      this.Products = this.allProducts.All_Products;
-      this.Products = this.Products.map((e: any) => {
+    this.api.getProduct().subscribe((res) => {
+      this.productList = res;
+      this.allProducts = this.productList.All_Products;
+      this.filterCategory = res.All_Products;
+
+      this.allProducts = this.allProducts.map((e: any) => {
         return { ...e, counter: 1 };
       });
-      console.log(this.Products);
+
+      console.log(this.allProducts);
     });
   }
 
   addToCard(id: any, amount: any) {
-    this._HttpClient
-      .post(
-        `http://localhost:5000/products/${id}`,
-        { amount: amount },
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        }
-      )
-      .subscribe({
-        next: (v) => {
-          console.log(v);
-        },
-        error: (e) => {
-          console.log(e);
-        },
-        complete: () => console.info('complete'),
-      });
-   window.location.reload();
-   /*   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['products']);
-  }) */
-
-  }
-
-  ngOnInit() {
-    this.getProducts();
+    this.cartService.addToCart(id, amount).subscribe((res) => {
+      console.log(res);
+      console.log(amount);
+    });
   }
 }

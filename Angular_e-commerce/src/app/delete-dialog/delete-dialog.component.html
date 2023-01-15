@@ -1,11 +1,27 @@
-<h1 mat-dialog-title>Delete Product</h1>
+<div class="container-header d-flex ">
+  <h1 mat-dialog-title>Delete Product</h1>
+  <div mat-dialog-actions>
+
+    <button
+      mat-button
+      mat-dialog-close
+      class="btn"
+      style="background-color: red; color: white"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+
 <div mat-dialog-content>
-  <h2>Are you Sure you want to Delete This Product ?</h2>
+  <h5>Are you Sure you want to Delete {{data.title}} ?</h5>
 
-  <button mat-button mat-dialog-close (click)="deleteProduct()">Confirm</button>
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>X</button>
+<br>
+
+
+  <button class="btn btn-danger   form-control" mat-button mat-dialog-close (click)="deleteProduct()">Confirm</button>
 </div>
 
- 
+
