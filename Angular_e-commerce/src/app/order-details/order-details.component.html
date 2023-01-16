@@ -1,0 +1,54 @@
+<h1>Order Bill</h1>
+<ng-container>
+  <div class="container">
+    <div class="card-table">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Name</th>
+
+            <th>Mobile number</th>
+            <th>email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of user_details">
+            <td>{{ item[0]["userName"] }}</td>
+            <td>{{ item[0]["phone"] }}</td>
+            <td>{{ item[0]["email"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Title</th>
+
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order_details">
+            <td>{{ item.title }}</td>
+            <td>{{ item.price | currency }}</td>
+            <td>{{ item.quantity }}</td>
+
+            <td>{{ item.quantity * item.price | currency }}</td>
+          </tr>
+          <th></th>
+          <th>Total quantity</th>
+          <th>Total Price</th>
+          <th></th>
+          <tr>
+            tax
+          </tr>
+          <tr>
+            Total
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>

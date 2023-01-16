@@ -21,6 +21,7 @@ import { PastOrdersComponent } from './past-orders/past-orders.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { FilterPipe } from './filter.pipe';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const appRoutes:Routes=[
   {path:'', redirectTo:'products',pathMatch:'full'},
@@ -47,6 +48,7 @@ const appRoutes:Routes=[
     PastOrdersComponent,
     AutoFocusDirective,
     FilterPipe,
+    OrderDetailsComponent,
 
    ],
   imports: [

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { OrderDetailsComponent } from '../order-details/order-details.component';
 
 @Component({
   selector: 'app-past-orders',
@@ -7,18 +9,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./past-orders.component.scss'],
 })
 export class PastOrdersComponent {
-  constructor(public _HttpClient: HttpClient) {}
+  constructor(public _HttpClient: HttpClient, public dialog: MatDialog) {}
 
   token: any = localStorage.getItem('token');
-
+  orderdetailes: any = [];
   allOrders: any;
   allPastOrders = [];
-  y = [];
-  x: any = [];
+
   cartProducts: any = [];
   subtotal: number = 0;
   total: number = 0;
- myBill :any = [];
+  myBill: any = [];
+
+  /////////////////
+
   getAllOrders() {
     this._HttpClient
       .get(`http://localhost:5000/orders`, {
@@ -28,44 +32,20 @@ export class PastOrdersComponent {
       })
       .subscribe((data) => {
         this.allOrders = data;
-   this.allPastOrders=this.allOrders.result;
-this.myBill =this.allOrders.bill;
+        this.allPastOrders = this.allOrders.result;
+        console.log(this.allOrders.result);
 
-console.log(this.myBill);
-
-const B= Object.assign({}, ...this.myBill);
-
-console.log(B);
-
-
-
-      /*   const result = Object.values(
-          this.allPastOrders.reduce((res: any, obj: any) => {
-            res[obj.order_id] = res[obj.order_id] || [
-              {
-                order_id: obj.order_id,
-                userName: obj.userName,
-                phone: obj.phone,
-                email: obj.email,
-              },
-
-              (this.y = this.allPastOrders.filter((element) => {
-                return element['order_id'] == obj.order_id;
-              })),
-              (this.x = this.y.map((ele) => {
-                return [{ title: ele['title'] }, { quantity: ele['quantity'] },{ price: ele['price'] }];
-              })),
-            ];
-
-            return res;
-          }, [])
-        ); */
-
-
-
-
+        this.orderdetailes = this.allPastOrders.map((e) => {
+          return e[1];
+        });
       });
+  }
 
+  detailsDialog(order_id: any): void {
+    this.dialog.open(OrderDetailsComponent, {
+      width: '500px',
+      data: { order_id },
+    });
   }
 
   ngOnInit() {
