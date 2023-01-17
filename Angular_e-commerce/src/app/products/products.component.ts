@@ -33,18 +33,25 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
-    this.cartService.search.subscribe((val:any)=>{
-      this.searchKey = val;})
+    this.cartService.search.subscribe((val: any) => {
+      this.searchKey = val;
+    });
   }
 
   filter(category: string) {
     console.log(this.filterCategory);
 
-    this.filterCategory =  this.allProducts.filter((a: any) => {
+    this.filterCategory = this.allProducts.filter((a: any) => {
       if (a.category == category || category == '') {
         return a;
       }
     });
+  }
+
+  checkLogin() {
+    if (!this.token) {
+      alert('please login first');
+    }
   }
 
   openDialog(
@@ -98,15 +105,28 @@ export class ProductsComponent implements OnInit {
       this.allProducts = this.allProducts.map((e: any) => {
         return { ...e, counter: 1 };
       });
-
+      this.filterCategory = this.allProducts.map((e: any) => {
+        return { ...e, counter: 1 };
+      });
       console.log(this.allProducts);
     });
   }
 
-  addToCard(id: any, amount: any) {
+  addToCard(id: any, amount: number) {
+    if (!this.token) {
+      alert('Please login first');
+    }
     this.cartService.addToCart(id, amount).subscribe((res) => {
       console.log(res);
       console.log(amount);
     });
+  }
+  decreaseValue(value: any, index: any) {
+    if (value <= 1) {
+      return;
+    } else {
+      this.filterCategory[index].counter =
+        this.filterCategory[index].counter - 1;
+    }
   }
 }

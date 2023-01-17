@@ -1,77 +1,63 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <a class="navbar-brand" href="/products"
-    ><span
-      ><img
-        src="https://media.licdn.com/dms/image/C4E0BAQFQyZSfHS_s_Q/company-logo_200_200/0/1538772323333?e=2147483647&v=beta&t=mCkJ9LwB9XgUnne8lEDf0acfK25DvUWXKTHg1MJTTOk"
-        style="width: 100px; height: 70px" /></span
-  ></a>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" routerLink="/products">Products </a>
-
-      <a class="btn" routerLink="/cart"> <i class="fa fa-shopping-cart"></i></a>
-      <p>{{ totalCart }}</p>
-
-      <a class="nav-item nav-link active" routerLink="/order">Orders</a>
+<header>
+  <div class="navbar navbar-dark bg-primary shadow-sm">
+    <div class="navbar-brand align-item-center d-flex">
+      <i style="font-size: 40px" class="fas fa-shipping-fast">&nbsp; </i>
+      <strong class="logo" style="font-size: 30px" routerLink="products"
+        >BLULOGIX</strong
+      >
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchTerm"
+          (keyup)="search($event)"
+          placeholder="search products"
+        />
+      </div>
+      <span class="fas fa-search search-icon"></span>
+    </div>
+    <div class="navbar-link">
       <a *ngIf="!token" class="nav-item nav-link active" routerLink="login"
         >Sign In</a
       >
+
       <a *ngIf="!token" class="nav-item nav-link active" routerLink="/signup"
         >Sign Up</a
       >
+
       <a
         *ngIf="token"
         (click)="signOut()"
         class="nav-item nav-link active"
-        href="products"
+        href="login"
         >Sign out</a
       >
-    </div>
-  </div>
-</nav>
- -->
 
+      <a
+        *ngIf="token && role != 1"
+        class="nav-item nav-link active"
+        routerLink="orders-history"
+        >Orders History</a
+      >
 
- <header>
-  <div class="navbar navbar-dark bg-primary shadow-sm">
-      <div class="navbar-brand align-item-center d-flex">
-          <i style="font-size: 40px;" class="fas fa-shipping-fast">&nbsp;
+  <!--     <a
+        *ngIf="this.myCarts.length"
+        class="nav-item nav-link active"
+        href="order"
+        >Current Order</a
+      > -->
 
-          </i>
-          <strong style="font-size: 30px;">BLULOGIX</strong>
-          <div class="form-group">
-              <input type="text" class="form-control"  [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="search products">
-          </div>
-          <span class="fas fa-search search-icon"></span>
-
-
+      <div class="icon">
+        <button
+          *ngIf="role != 1"
+          (click)="checkLogin()"
+          routerLink="cart"
+          class="btn btn-primary"
+        >
+          <i style="font-size: 30px" class="fas fa-cart-plus"></i>
+          <div style="font-size: 10px" class="badge bg-danger">{{ total }}</div>
+        </button>
       </div>
-      <a *ngIf="!token" class="nav-item nav-link active" routerLink="login"
-      >Sign In</a
-    >
-    <a
-    *ngIf="token"
-    (click)="signOut()"
-    class="nav-item nav-link active"
-    href="products"
-    >Sign out</a
-  >
-      <button routerLink="cart" class="btn btn-primary">
-          <i style="font-size: 30px;" class="fas fa-cart-plus"></i>
-          <div style="font-size: 10px;" class="badge bg-danger">{{total}} </div>
-      </button>
+    </div>
   </div>
 </header>

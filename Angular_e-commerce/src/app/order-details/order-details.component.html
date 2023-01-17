@@ -1,8 +1,20 @@
-<h1>Order Bill</h1>
-<ng-container>
+<div class="container-header d-flex ">
+  <h1 mat-dialog-title>Order invoice</h1>
+  <div mat-dialog-actions>
+
+    <button
+      mat-button
+      mat-dialog-close
+      class="btn"
+      style="background-color: red; color: white"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div><ng-container>
   <div class="container">
     <div class="card-table">
-      <table class="table table-responsive">
+<!--       <table class="table table-responsive">
         <thead>
           <tr>
             <th>Name</th>
@@ -18,7 +30,7 @@
             <td>{{ item[0]["email"] }}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <table class="table table-responsive">
         <thead>
           <tr>
@@ -37,16 +49,17 @@
 
             <td>{{ item.quantity * item.price | currency }}</td>
           </tr>
-          <th></th>
-          <th>Total quantity</th>
-          <th>Total Price</th>
-          <th></th>
-          <tr>
-            tax
-          </tr>
-          <tr>
-            Total
-          </tr>
+<div class="tot">
+          <h6 style="font-weight: bold;">
+            Subtotal :{{subtotal | currency}}
+          </h6>
+          <h6 style="font-weight: bold;">
+            Tax :14%
+          </h6>
+          <h6 style="font-weight: bold;">
+            Total :{{0.14*subtotal+subtotal | currency}}
+          </h6>
+        </div>
         </tbody>
       </table>
     </div>

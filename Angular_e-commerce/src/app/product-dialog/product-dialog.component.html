@@ -1,69 +1,75 @@
-
-
- <div class="container-header d-flex ">
-    <h1 mat-dialog-title>Add New Product</h1>
-    <div mat-dialog-actions>
-
-      <button
-        mat-button
-        mat-dialog-close
-        class="btn"
-        style="background-color: red; color: white"
-      >
-        <i class="fa fa-times"></i>
-      </button>
-    </div>
+<div class="container-header d-flex">
+  <h1 mat-dialog-title>Add New Product</h1>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+      class="btn"
+      style="background-color: red; color: white"
+    >
+      <i class="fa fa-times"></i>
+    </button>
   </div>
-  <div class="addProduct" mat-dialog-content >
-    <form (ngSubmit)="addNewProduct(newProduct.value)" #newProduct="ngForm">
-      <br />
+</div>
+<div class="addProduct" mat-dialog-content>
+  <form (ngSubmit)="addNewProduct(newProduct.value)" #newProduct="ngForm">
+    <br />
 
-<!--       <label for="title">Title</label> -->
-      <input class="form-control"
-        id="title"
-        ngModel
-        name="title"
-        type="text"
-        style="border-radius: 5px"
-        placeholder="Title"
-      />
-      <br />
+    <!--       <label for="title">Title</label> -->
+    <input
+      class="form-control"
+      id="title"
+      ngModel
+      name="title"
+      type="text"
+      style="border-radius: 5px"
+      placeholder="Title"
+    />
+    <br />
     <!--   <label for="price">Price</label> -->
-      <input class="form-control"
-        id="price"
-        ngModel
-        name="price"
-        type="text"
-        style="border-radius: 5px"
-        placeholder="Price"
-      />
-      <br />
-<!--      <label for="image">Image</label>
- -->      <input class="form-control"
-        id="image"
-        ngModel
-        name="image"
-        type="text"
-        style="border-radius: 5px"
-        placeholder="Image"
-      />
-      <br />
-       
-   <!--  <label for="category">Choose a Category:</label>  -->
+    <input
+      class="form-control"
+      id="price"
+      ngModel
+      name="price"
+      type="text"
+      style="border-radius: 5px"
+      placeholder="Price"
+    />
+    <br />
+    <!--      <label for="image">Image</label>
+ -->
+    <input
+      class="form-control"
+      id="image"
+      ngModel
+      name="image"
+      type="text"
+      style="border-radius: 5px"
+      placeholder="Image"
+    />
+    <br />
 
-   <select class="form-control" name="category" id="cars"   ngModel>
-     <option value="">Select Category</option>
-     <option value="saab">Phone</option>
-     <option value="mercedes">Computer</option>
-     <option value="tablet">Tablet</option>
-   </select>
-      <br>
-      <button class="btn btn-primary form-control" type="submit" mat-button mat-dialog-close>
-        confirm
-      </button>
-    </form>
+    <!--  <label for="category">Choose a Category:</label>  -->
+
+    <select class="form-control" name="category" id="cars" ngModel>
+      <option value="">Select Category</option>
+      <option value="phone">Phone</option>
+      <option value="computer">Computer</option>
+      <option value="tablet">Tablet</option>
+    </select>
+    <br />
+    <button
+      class="btn btn-primary form-control"
+      type="submit"
+      mat-button
+      mat-dialog-close
+    >
+      confirm
+    </button>
+
+    <p style="color: red;">{{ msg }}</p>
+  </form>
+  <br>
 
 </div>
-
-
-

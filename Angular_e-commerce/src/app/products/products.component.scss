@@ -22,51 +22,131 @@
 
 .item a:hover {
   color: blue;
+  cursor: pointer;
 }
 
 .card {
-    padding: 20px;
-    margin: 50px;
+  padding: 20px;
+  margin: 50px;
 }
 
 .card img {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 15px;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
 
-    transition: 0.3s ease-in-out;
-
+  transition: 0.3s ease-in-out;
 }
 
 .card img:hover {
-    transition: 0.3s ease-in-out;
-    transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+  transform: scale(1.1);
 }
 .fix-gaps {
   margin: 45px !important;
   padding: 10px !important;
   justify-content: center;
   align-items: center;
-
 }
 
-.detail{
-margin-right: 60px;
+.detail {
+  margin-right: 60px;
 }
 
-
-.product-btn{
- display: flex;
- gap: 15px;
- margin-right: 70px;
-}
-
-.cart-btn
-{
+.product-btn {
   display: flex;
-flex-direction: column;
-justify-content: center;
- margin: 10px;
- padding: 10px;
- gap: 10px;
+  gap: 15px;
+  margin-right: 70px;
+}
+
+.cart-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.wrapper {
+  text-transform: uppercase;
+  background: #ececec;
+  color: #555;
+  cursor: help;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+
+  position: relative;
+  text-align: center;
+  -webkit-transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrapper .tooltip {
+  background: #0D6EFD;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  right: -20px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+  opacity: 0;
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  -ms-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #0D6EFD 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+
+  width: 10px;
+}
+
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px);
+}
+
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
 }

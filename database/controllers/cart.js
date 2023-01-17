@@ -104,11 +104,35 @@ const removeItem = (req, res) => {
       connection.query(query, data, (err, results) => {
       
         if (results.affectedRows != 0) {
-          return res.status(201).json({
-            success: true,
-            massage: `Product Amount Updated -1`,
-            result: results,
-          });
+
+          const query = `UPDATE cart SET is_deleted=case when quantity<1 then 1 else  0 end WHERE productId = ?;`;
+          const data = [id];
+connection.query(query, data, (err, results) =>{ 
+console.log(result);
+  if (results){
+    return res.status(201).json({
+      success: true,
+      massage: "updated",
+     })
+
+
+ } else {
+  return res.status(500).json({
+    success: false,
+    massage: "Server error",
+    err: err,
+  });
+}
+});
+
+
+
+
+
+
+
+
+
         } else {
           return res.status(500).json({
             success: false,

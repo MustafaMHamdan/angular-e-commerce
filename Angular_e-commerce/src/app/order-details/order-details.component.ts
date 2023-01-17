@@ -16,6 +16,7 @@ export class OrderDetailsComponent {
 
   token: any = localStorage.getItem('token');
   orderD: any;
+  subtotal: any = 0;
   user_details: any;
   order_details: any;
   checkOrderDetail() {
@@ -30,7 +31,13 @@ export class OrderDetailsComponent {
 
         this.user_details = this.orderD.result;
         this.order_details = this.user_details[0][1];
+
         console.log(this.order_details);
+        for (let i = 0; i < this.order_details.length; i++) {
+          this.subtotal =
+            this.subtotal +
+            this.order_details[i].quantity * this.order_details[i].price;
+        }
       });
   }
 

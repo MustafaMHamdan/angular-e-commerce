@@ -51,7 +51,7 @@ export class OrdersComponent {
         },
         complete: () => console.info('complete'),
       });
-      window.location.reload();
+   
   }
 
   ngOnInit() {

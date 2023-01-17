@@ -19,6 +19,7 @@ export class SignUpComponent implements AfterViewInit {
   massage: any = {};
 
   signUp(form: NgForm) {
+    
     this._HttpClient.post(`http://localhost:5000/register`, form).subscribe({
       next: (v) => {
         (this.massage = v), (this.msg = this.massage.massage);

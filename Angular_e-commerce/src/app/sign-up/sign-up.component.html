@@ -1,28 +1,57 @@
-<div class="container">
-  <div class="title">Welcome</div>
-  <div class="subtitle">Let's create your account!</div>
-  <form
-    class="inputs"
-    (ngSubmit)="signUp(signUpform.value)"
-    #signUpform="ngForm"
-  >
-    <label for="username">User Name</label>
-    <input  #username id="userName" ngModel name="userName" />
-    <br />
-    <label for="phone">Phone Number</label>
-    <input id="phone" ngModel name="phone" />
-    <br />
-    <label for="email">Email</label>
-    <input id="email" ngModel name="email" type="email" />
-    <br />
-    <label for="password">Password</label>
-    <input id="password" ngModel name="password" type="password" />
-    <br />
-    <button class="btn btn-primary" type="submit">Sign-Up</button>
-  </form>
-  <div>
-    <p>{{ msg }}</p>
+<div class="up-body">
+<!--   <div class="logo">
+    <img
+      src="https://blulogix.com/wp-content/uploads/2018/10/ico-file.gif"
+      style="width: 50px; height: 50px"
+    />
+  </div> -->
 
-    <a href="/login">Do You have An Account ?Login! </a>
+  <div class="container">
+    <div class="title">Create Account</div>
+
+    <form
+      class="signIn-form"
+      (ngSubmit)="signUp(signUpform.value)"
+      #signUpform="ngForm"
+    >
+      <label for="username">User Name</label>
+      <input
+        class="form-control test"
+        #username
+        required
+        id="userName"
+        ngModel
+        name="userName"
+      />
+      <br />
+      <label for="phone">Phone Number</label>
+      <input class="form-control test" id="phone" ngModel name="phone" />
+      <br />
+      <label for="email">Email</label>
+      <input
+        class="form-control test"
+        id="email"
+        ngModel
+        name="email"
+        type="email"
+      />
+      <br />
+      <label for="password">Password</label>
+      <input
+        class="form-control test"
+        id="password"
+        ngModel
+        name="password"
+        type="password"
+      />
+      <br />
+      <button class="btn btn-primary" type="submit">Sign-Up</button>
+    </form>
+    <br>
+    <div>
+      <p style="color: red;">{{ msg }}</p>
+
+      <a href="/login">Do You have An Account ?Login! </a>
+    </div>
   </div>
 </div>

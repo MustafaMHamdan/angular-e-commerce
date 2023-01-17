@@ -14,6 +14,7 @@ export class NavbarComponent {
   token: any = localStorage.getItem('token');
   allCartProducts: any = [];
   totalCart: number = 0;
+  role: any = localStorage.getItem('role');
   signOut() {
     localStorage.clear();
   }
@@ -36,8 +37,19 @@ console.log(this.searchTerm);
 this.cartService.search.next(this.searchTerm);
   }
 
+checkLogin(){
+if(!this.token)
+{alert('please login first')}
+}
+
+
+
   ngOnInit() {
     this.getCartItems();
-    
+
   }
+
+
+
+
 }

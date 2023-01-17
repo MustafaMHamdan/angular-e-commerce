@@ -1,54 +1,72 @@
-<button class="btn btn-primary" routerLink="/orders-history">
-  Orders History
-</button>
-<table class="table table-responsive">
-  <thead>
-    <tr>
-      <th>Sr.No</th>
-      <th>Product Name</th>
-      <th>Product Image</th>
+<ng-container *ngIf="cartProducts.length">
+  <div class="container">
+    <div class="card-table">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Sr.No</th>
+            <th>Product Name</th>
+            <th>Product Image</th>
 
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of cartProducts; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ item.title }}</td>
-      <td>
-        <img style="width: 120px" src="{{ item.image }}" alt="" />
-      </td>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartProducts; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+              <img style="width: 120px" src="{{ item.image }}" alt="" />
+            </td>
 
-      <th style="width: 12%">{{ item.price | currency }}</th>
-      <td style="width: 12%">{{ item.quantity }}</td>
-      <td style="width: 12%">
-        {{ item.quantity * item.price | currency }}
-      </td>
-    </tr>
-    <tr>
-      <td colspan="4"></td>
+            <th style="width: 12%">{{ item.price | currency }}</th>
+            <td style="width: 12%">{{ item.quantity }}</td>
+            <td style="width: 24%">
+              {{ item.quantity * item.price | currency }}
+            </td>
+          </tr>
+          <tr>
+            <td class="rr" colspan="4"></td>
 
-      <td>
-        <button routerLink="/products" class="btn btn-primary">
-          Shop More
-        </button>
-      </td>
-      <td>
-        <button
-          *ngIf="cartProducts.length != 0"
-          routerLink="/order"
-          class="btn btn-success"
-          (click)="submitOrder()"
-        >
-          Submit Order
-        </button>
-      </td>
+            <td>
+              <button routerLink="/products" class="btn btn-primary">
+                Shop More
+              </button>
+            </td>
+            <td>
+              <strong>Subtotal : ${{ subtotal }}</strong>
+            </td>
+            <td>
+              <button
+                *ngIf="cartProducts.length != 0"
+                routerLink="/products"
+                class="btn btn-success"
+                (click)="submitOrder()"
+              >
+                Submit
+              </button>
+            </td>
 
-      <td>
-        <strong>Subtotal : ${{ subtotal }}</strong>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!cartProducts.length">
+  <div class="container">
+    <div class="card">
+
+    </div>
+    <div class="center">
+
+      <h4>There is No Current Order!</h4>
+      <h6>you can check your past order here</h6>
+      <button routerLink="/orders-history" class="btn btn-primary">Orders History</button>
+    </div>
+  </div>
+
+
+>

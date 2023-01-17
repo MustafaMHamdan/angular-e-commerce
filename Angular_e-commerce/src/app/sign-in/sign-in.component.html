@@ -1,21 +1,32 @@
 <div class="container">
-  <div class="brand-logo"></div>
-  <div class="brand-title">BLU<span style="color: #4eb9cb">LOGIX</span></div>
+  <div class="title">Login</div>
 
-  <form class="inputs" (ngSubmit)="signIn(SignIn.value)" #SignIn="ngForm" >
+  <form (ngSubmit)="signIn(SignIn.value)" #SignIn="ngForm">
     <br />
-    <label for="email">Email</label>
-    <input #email id="email"   ngModel name="email" type="email" />
+    <label for="email" required>Email</label>
+    <input
+      class="form-control test"
+      #email
+      id="email"
+      ngModel
+      name="email"
+      type="email"
+    />
     <br />
     <label for="password">Password</label>
-    <input id="password"   ngModel name="password" type="password" />
+    <input
+      class="form-control test"
+      id="password"
+      ngModel
+      name="password"
+      type="password"
+    />
     <br />
-    <button class="btn btn-primary" type="submit"  >Sign-In</button>
+    <button class="btn btn-primary" type="submit">Sign-In</button>
   </form>
-<div>
-  <p >{{msg}}</p>
-  <a href="/signup">Not registered? Create an account</a>
+  <br />
+  <div>
+    <p style="color: red">{{ msg }}</p>
+    <a href="/signup">Not registered yet? Create an account!</a>
+  </div>
 </div>
-</div>
-
-

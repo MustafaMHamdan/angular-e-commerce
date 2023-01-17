@@ -63,7 +63,7 @@ button {
 }
  */
  .card {
-  height: 60vh;
+  height: 75vh;
   margin: 25px;
   padding: 25px;
 }
@@ -83,13 +83,6 @@ h6 {
   font-weight: 400;
 }
 
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
 
 .card-table {
   position: relative;
@@ -105,8 +98,17 @@ h6 {
 
 .center .btn {
   font-size: 14px !important;
-  margin-top: 20px !important;
+  margin-top: 50px !important;
   font-weight: 400;
   padding: 12px 72px;
   border-radius: 3px !important;
 }
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+

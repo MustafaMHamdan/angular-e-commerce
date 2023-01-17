@@ -7,12 +7,39 @@ const addProduct = (req, res) => {
   const query = `INSERT INTO products (title,price, image ,category,SellerId) VALUES (?,?,?,?,?)`;
   const data = [title, price, image,category,SellerId];
   connection.query(query, data, (err, result) => {
+
+    if (title == "") {
+      return res.status(409).json({
+        massage: "Product title required",
+      });
+    } else if (price == "") {
+      return res.status(409).json({
+        massage: " ! Product price required ",
+      });
+      
+    } 
+    
+    else if (image=="") {
+      return res.status(409).json({
+        massage: " ! Product image required!  ",
+      });
+    }
+
+    else if (category=="") {
+      return res.status(409).json({
+        massage: " ! Product category required!  ",
+      });
+    }
+
+
+
     if (err) {
       return res.status(409).json({
         success: false,
         err: err.message,
       });
     }
+
 
     return res.status(200).json({
       success: true,

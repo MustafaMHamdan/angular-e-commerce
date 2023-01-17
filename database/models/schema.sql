@@ -13,7 +13,7 @@ CREATE TABLE roles (
 CREATE TABLE users(
     UserID INT AUTO_INCREMENT NOT NULL,
     userName VARCHAR(255),
-    phone VARCHAR(255),
+    phone VARCHAR(255)  ,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255),
     role_id INT,
