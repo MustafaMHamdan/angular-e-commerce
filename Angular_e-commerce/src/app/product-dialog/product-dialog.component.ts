@@ -12,8 +12,7 @@ import { ProductsService } from '../products.service';
 })
 export class ProductDialogComponent {
   registerForm!: FormGroup;
-  submitted = false;
-
+ 
   constructor(
     private api: ProductsService,
     public dialogRef: MatDialogRef<ProductDialogComponent>,

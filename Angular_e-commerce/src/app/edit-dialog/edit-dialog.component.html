@@ -1,8 +1,6 @@
-
-<div class="container-header d-flex ">
+<div class="container-header d-flex">
   <h1 mat-dialog-title>Update Product</h1>
   <div mat-dialog-actions>
-
     <button
       mat-button
       mat-dialog-close
@@ -15,47 +13,158 @@
 </div>
 
 <div mat-dialog-content class="f">
-  <form
-    class="signIn-form"
-    (ngSubmit)="editProduct()"
-    #editedProduct="ngForm"
-  >
+  <form class="signIn-form" (submit)="editProduct()" [formGroup]="registerForm">
     <br />
-    <label for="title">Title</label>
-    <input class="form-control" id="title"  [(ngModel)]="data.title" name="title"  type="text" placeholder="title"   required/>
-    <div *ngIf="data.title.invalid && (data.title.dirty ||data.title.touched)" class="alert">
-      Title is required.
+    <div class="form-group">
+      <label for="title">*Title</label>
+      <input
+        class="form-control"
+        id="title"
+        [(ngModel)]="data.title"
+        name="title"
+        type="text"
+        placeholder="title"
+        required
+        [ngClass]="{
+          'is-invalid':
+            registerForm.controls['title'].touched &&
+            registerForm.controls['title'].errors
+        }"
+        formControlName="title"
+      />
+      <div
+        *ngIf="
+          registerForm.controls['title'].touched &&
+          registerForm.controls['title'].errors
+        "
+        class="text-danger"
+      >
+        <div
+          *ngIf="
+            registerForm.controls['title'].touched &&
+            registerForm.controls['title'].errors['required']
+          "
+        >
+          Title is required
+        </div>
+      </div>
     </div>
-    <br />
-    <label for="price">Price</label>
-    <input class="form-control" id="price" [(ngModel)]="data.price" name="price" type="text"  placeholder="price" />
-    <!-- <div *ngIf="price.invalid && (price.dirty ||price.touched)" class="alert">
-      Price is required.
-    </div> -->
-    <br />
-    <label for="image">Image</label>
-    <input class="form-control" id="image" [(ngModel)]="data.image" name="image" type="text"  placeholder="image"/>
-   <!--  <div *ngIf="image.invalid && (image.dirty ||image.touched)" class="alert">
-      Image is required.
-    </div> -->
-    <br />
-     <label for="category">Category</label>
-    <select  class="form-control" name="category" id="category"   [(ngModel)]="data.category" name="category">
 
+    <br />
+    <div class="form-group">
+      <label for="price">*Price</label>
+      <input
+        class="form-control"
+        id="price"
+        [(ngModel)]="data.price"
+        name="price"
+        type="number"
+        placeholder="price"
+        required
+        [ngClass]="{
+          'is-invalid':
+            registerForm.controls['price'].touched &&
+            registerForm.controls['price'].errors
+        }"
+        formControlName="price"
+      />
+      <div
+        *ngIf="
+          registerForm.controls['price'].touched &&
+          registerForm.controls['price'].errors
+        "
+        class="text-danger"
+      >
+        <div
+          *ngIf="
+            registerForm.controls['price'].touched &&
+            registerForm.controls['price'].errors['required']
+          "
+        >
+          Price is required
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+      <label for="image">*Image</label>
+      <input
+        class="form-control"
+        id="image"
+        [(ngModel)]="data.image"
+        name="image"
+        type="text"
+        placeholder="image"
+        required
+        [ngClass]="{
+          'is-invalid':
+            registerForm.controls['image'].touched &&
+            registerForm.controls['image'].errors
+        }"
+        formControlName="image"
+      />
+      <div
+        *ngIf="
+          registerForm.controls['image'].touched &&
+          registerForm.controls['image'].errors
+        "
+        class="text-danger"
+      >
+        <div
+          *ngIf="
+            registerForm.controls['image'].touched &&
+            registerForm.controls['image'].errors['required']
+          "
+        >
+          Image is required
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+    <label for="category">*Category</label>
+    <select
+      class="form-control"
+      name="category"
+      id="category"
+      [(ngModel)]="data.category"
+      name="category"
+      formControlName="category"
+      required
+      [ngClass]="{
+        'is-invalid':
+          registerForm.controls['category'].touched &&
+          registerForm.controls['category'].errors
+      }"
+      formControlName="category"
+    >
       <option value="phone">Phone</option>
       <option value="computer">Computer</option>
       <option value="tablet">Tablet</option>
     </select>
-    <br />
-    <button
-      class="btn btn-primary"
-      type="submit"
-      mat-button
-      mat-dialog-close
-
+    <div
+    *ngIf="
+      registerForm.controls['category'].touched &&
+      registerForm.controls['category'].errors
+    "
+    class="text-danger"
+  >
+    <div
+      *ngIf="
+        registerForm.controls['category'].touched &&
+        registerForm.controls['category'].errors
+      "
     >
+    Category is required
+    </div>
+  </div>
+
+    <br />
+  </div>
+    <button class="btn btn-primary" type="submit" mat-button >
       confirm
     </button>
   </form>
 </div>
-

@@ -1,14 +1,13 @@
 const connection = require("../models/db");
 
 const addProduct = (req, res) => {
-  const { title, price, image ,category} = req.body;
+  const { title, price, image, category } = req.body;
   SellerId = req.token.userId;
 
   const query = `INSERT INTO products (title,price, image ,category,SellerId) VALUES (?,?,?,?,?)`;
-  const data = [title, price, image,category,SellerId];
+  const data = [title, price, image, category, SellerId];
   connection.query(query, data, (err, result) => {
-
-    if (title == "") {
+    /* if (title == "") {
       return res.status(409).json({
         massage: "Product title required",
       });
@@ -30,8 +29,7 @@ const addProduct = (req, res) => {
         massage: " ! Product category required!  ",
       });
     }
-
-
+ */
 
     if (err) {
       return res.status(409).json({
@@ -40,10 +38,9 @@ const addProduct = (req, res) => {
       });
     }
 
-
     return res.status(200).json({
       success: true,
-      massage: "Product Added Successfully",
+
       result: data,
     });
   });
@@ -140,7 +137,7 @@ const deleteProduct = (req, res) => {
 /* ************************* edit product */
 
 const updateProduct = (req, res) => {
-  const { title, price, image,category } = req.body;
+  const { title, price, image, category } = req.body;
   const id = req.params.id;
   const userId = req.token.userId;
 

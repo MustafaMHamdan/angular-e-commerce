@@ -13,7 +13,7 @@ const register = async (req, res) => {
   connection.query(query, data, (err, result) => {
     console.log(result);
     let mailFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    if (userName == "") {
+/*     if (userName == "") {
       return res.status(409).json({
         massage: "!Username required",
       });
@@ -41,10 +41,16 @@ const register = async (req, res) => {
       return res.status(409).json({
         massage: "!Your Password should have at least 6 characters ",
       });
-    } //
+    } */ //
     
     
-    
+     if (err) {
+      return res.status(409).json({
+        success: false,
+        massage:" already exist",
+        err:err.message ,
+      });
+    }
     
 
     return res.status(200).json({

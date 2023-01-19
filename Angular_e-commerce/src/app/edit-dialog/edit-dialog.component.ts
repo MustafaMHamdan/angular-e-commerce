@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -11,30 +10,52 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditDialogComponent {
   token: any = localStorage.getItem('token');
+  registerForm!: FormGroup;
+
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public _HttpClient: HttpClient
+    public _HttpClient: HttpClient ,
+    private formBuilder: FormBuilder
   ) {}
-  editProduct() {
-    this._HttpClient
-      .put(`http://localhost:5000/products/${this.data.id}`, {
-title:this.data.title,price:this.data.price,image:this.data.image,category:this.data.category
 
-      }, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
+
+
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+      category: ['',[Validators.required]]
+    });
+  }
+
+
+  editProduct() {
+
+    this.registerForm.markAllAsTouched();
+
+
+
+
+    this._HttpClient
+      .put(
+        `http://localhost:5000/products/${this.data.id}`,
+        {
+          title: this.data.title,
+          price: this.data.price,
+          image: this.data.image,
+          category: this.data.category,
         },
-      })
-      .subscribe({
-        next: (v) => {
-          console.log(v);
-        },
-        error: (e) => {
-          console.log(e);
-        },
-        complete: () => console.info('complete'),
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      )
+      .subscribe((res) => {
+        this.dialogRef.close();
       });
   }
 }

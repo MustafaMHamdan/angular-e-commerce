@@ -21,7 +21,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private api: ProductsService,
     private cartService: CartserviceService,
-    public dialog: MatDialog,private route: Router
+    public dialog: MatDialog,
+    private route: Router
   ) {}
 
   amount: number = 0;
@@ -62,7 +63,7 @@ export class ProductsComponent implements OnInit {
   ): void {
     this.dialog.open(ProductDialogComponent, {
       width: '400px',
-     
+
       exitAnimationDuration,
       enterAnimationDuration,
     });
