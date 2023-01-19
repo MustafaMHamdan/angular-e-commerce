@@ -6,7 +6,7 @@
       <label for="email">Email</label>
       <input
         [ngClass]="{
-          'is-invalid': submitted && registerForm.controls['email'].errors
+          'is-invalid': registerForm.controls['email'].touched && registerForm.controls['email'].errors
         }"
         formControlName="email"
         class="form-control"
@@ -15,16 +15,16 @@
       />
 
       <div
-        *ngIf="submitted && registerForm.controls['email'].errors"
+        *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors"
         class="text-danger"
       >
         <div
-          *ngIf="submitted && registerForm.controls['email'].errors['required']"
+          *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors['required']"
         >
           Email Address is required
         </div>
         <div
-          *ngIf="submitted && registerForm.controls['email'].errors['email']"
+          *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors['email']"
         >
           Email Address is not Valid
         </div>
@@ -35,7 +35,7 @@
       <label for="password">Password</label>
       <input
         [ngClass]="{
-          'is-invalid': submitted && registerForm.controls['password'].errors
+          'is-invalid': registerForm.controls['password'].touched && registerForm.controls['password'].errors
         }"
         formControlName="password"
         class="form-control"
@@ -44,19 +44,19 @@
       />
 
       <div
-        *ngIf="submitted && registerForm.controls['password'].errors"
+        *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors"
         class="text-danger"
       >
         <div
           *ngIf="
-            submitted && registerForm.controls['password'].errors['required']
+          registerForm.controls['password'].touched && registerForm.controls['password'].errors['required']
           "
         >
           Password is required
         </div>
         <div
           *ngIf="
-            submitted && registerForm.controls['password'].errors['minlength']
+          registerForm.controls['password'].touched && registerForm.controls['password'].errors['minlength']
           "
         >
           Password should be at least 6 characters

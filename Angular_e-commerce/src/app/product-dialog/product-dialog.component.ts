@@ -30,20 +30,19 @@ export class ProductDialogComponent {
       title: ['', [Validators.required]],
       price: ['', [Validators.required]],
       image: ['', [Validators.required]],
-      category: [''],
+      category: ['',[Validators.required]]
     });
   }
 
   addNewProduct() {
-    this.submitted = true;
-    console.log(this.registerForm.value);
+    this.registerForm.markAllAsTouched();
 
     if (this.registerForm.invalid) {
       return;
     }
 
     this.api.addToProduct(this.registerForm.value).subscribe((res) => {
-      console.log(res);
+      this.dialogRef.close()
     });
   }
 }
