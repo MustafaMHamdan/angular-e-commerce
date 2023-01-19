@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from './auth/auth.service'
+
 import { AuthGuard } from './auth/auth.guard'
  import { Routes,RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';

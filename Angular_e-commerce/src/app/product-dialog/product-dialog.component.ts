@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NgForm } from '@angular/forms';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ProductsService } from '../products.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-dialog',
@@ -11,9 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-dialog.component.scss'],
 })
 export class ProductDialogComponent {
-  constructor(private  route : Router,
+  registerForm!: FormGroup;
+  submitted = false;
+
+  constructor(
     private api: ProductsService,
-    public dialogRef: MatDialogRef<ProductDialogComponent>
+    public dialogRef: MatDialogRef<ProductDialogComponent>,
+    private formBuilder: FormBuilder
   ) {}
 
   token: any = localStorage.getItem('token');
@@ -21,15 +25,25 @@ export class ProductDialogComponent {
   errorMsg: any = '';
   massage: any = {};
 
-  addNewProduct(form: NgForm) {
-    this.api.addToProduct(form).subscribe({
-      next: (v) => {
-        (this.massage = v), (this.msg = this.massage.massage);
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+      category: [''],
+    });
+  }
 
-      },
-      error: (e) => {(this.msg = e.error.massage),console.log(this.msg);
-      },
-      complete: () => console.info('complete'),
+  addNewProduct() {
+    this.submitted = true;
+    console.log(this.registerForm.value);
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.api.addToProduct(this.registerForm.value).subscribe((res) => {
+      console.log(res);
     });
   }
 }

@@ -6,6 +6,7 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 import { CartserviceService } from '../cartservice.service';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private api: ProductsService,
     private cartService: CartserviceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,private route: Router
   ) {}
 
   amount: number = 0;
@@ -50,7 +51,8 @@ export class ProductsComponent implements OnInit {
 
   checkLogin() {
     if (!this.token) {
-      alert('please login first');
+      alert('Please login first');
+      this.route.navigate(['/login']);
     }
   }
 
@@ -60,6 +62,7 @@ export class ProductsComponent implements OnInit {
   ): void {
     this.dialog.open(ProductDialogComponent, {
       width: '400px',
+     
       exitAnimationDuration,
       enterAnimationDuration,
     });
@@ -115,6 +118,7 @@ export class ProductsComponent implements OnInit {
   addToCard(id: any, amount: number) {
     if (!this.token) {
       alert('Please login first');
+      this.route.navigate(['/login']);
     }
     this.cartService.addToCart(id, amount).subscribe((res) => {
       console.log(res);

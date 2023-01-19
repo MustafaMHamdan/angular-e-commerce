@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap");
 
-.up-body{
-margin-bottom: 100px;
+.up-body {
+  margin-bottom: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,10 +12,9 @@ margin-bottom: 100px;
   margin-top: 20px;
   position: relative;
   width: 350px;
-  height: 550px;
+  height: 630px;
 
-
-  padding: 14px ;
+  padding: 14px;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.25rem;
@@ -26,13 +25,15 @@ margin-bottom: 100px;
   font-family: sans-serif;
   font-size: 26px;
   font-weight: 570px;
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-.test:focus{
-
- box-shadow: none !important;
+.test:focus {
+  box-shadow: none !important;
 }
 
-
-
-
+.alert {
+  color: #C64552;
+  font-size: 15px;
+  padding: 4px;
+  margin: 0px;
+}

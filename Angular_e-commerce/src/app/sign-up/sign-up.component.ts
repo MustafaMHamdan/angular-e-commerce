@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 @Component({
@@ -8,25 +9,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements AfterViewInit {
-  constructor(public _HttpClient: HttpClient,private  route : Router) {}
+  registerForm!: FormGroup;
+  submitted = false;
+  constructor(
+    public _HttpClient: HttpClient,
+    private route: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
-  @ViewChild('username') userName! :ElementRef<HTMLInputElement>
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      userName: ['', [Validators.required]],
+      phone: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  @ViewChild('Myname') username!: ElementRef<HTMLInputElement>;
+
   ngAfterViewInit(): void {
-    this.userName.nativeElement.focus()
+    this.username.nativeElement.focus();
   }
   msg: any = '';
   errorMsg: any = '';
   massage: any = {};
 
-  signUp(form: NgForm) {
-    
-    this._HttpClient.post(`http://localhost:5000/register`, form).subscribe({
-      next: (v) => {
-        (this.massage = v), (this.msg = this.massage.massage);
-        this.route.navigate(['/login'])
-      },
-      error: (e) => (this.msg = e.error.massage),
-      complete: () => console.info('complete'),
-    });
+
+
+  signUp() {
+   this.registerForm.markAllAsTouched();
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this._HttpClient
+      .post(`http://localhost:5000/register`, this.registerForm.value)
+      .subscribe({
+        next: (v) => {
+          (this.massage = v), (this.msg = this.massage.massage);
+          this.route.navigate(['/login']);
+        },
+        error: (e) => (this.msg = e.error.massage),
+        complete: () => console.info('complete'),
+      });
   }
 }

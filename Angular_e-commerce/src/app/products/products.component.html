@@ -48,11 +48,11 @@
     (click)="openDialog('0ms', '0ms')"
     *ngIf="role == 1"
   >
-  <i class="fa fa-plus"></i>
+    <i class="fa fa-plus"></i>
   </button>
   <div class="tooltip">You can add Your Product here</div>
 </div>
-<div class="container"  >
+<div class="container">
   <div class="row">
     <ng-container
       *ngFor="
@@ -78,35 +78,38 @@
         </div>
         <div class="cart-btn">
           <div>
-            <button *ngIf="role != 1" (click)="item.counter = item.counter + 1" class="btn">
+            <button
+              *ngIf="role != 1"
+              (click)="item.counter = item.counter + 1"
+              class="btn"
+            >
               <i class="fa fa-plus"></i>
             </button>
 
             <input
               style="width: 50px"
-              *ngIf="role == 2"
+              *ngIf="role != 1"
               class="input-cas"
               [(ngModel)]="item.counter"
               onKeyDown="return false"
               min="1"
             />
-            <button class="btn" *ngIf="role != 1" >
-              <i
-                class="fa fa-minus"
-                (click)="decreaseValue(item.counter, i)"
-              ></i>
+            <button
+              class="btn"
+              *ngIf="role != 1"
+              (click)="decreaseValue(item.counter, i)"
+            >
+              <i class="fa fa-minus"></i>
             </button>
           </div>
 
-           <button
+          <button
             *ngIf="role != 1"
-            class="btn btn-primary "
+            class="btn btn-primary"
             (click)="addToCard(item.productID, item.counter)"
-
           >
             Add to Cart
           </button>
-
         </div>
 
         <div class="product-btn" *ngIf="role == 1 && userId == item.SellerId">

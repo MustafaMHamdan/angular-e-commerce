@@ -3,6 +3,15 @@
 
 }
 
-.f{
-/*   overflow: hidden; */
+.alert{
+  color: #C64552;
+  font-size: 15px;
+  padding: 3px;
+  margin: 0px;
+}
+
+
+:host ::ng-deep .mat-mdc-dialog-content {
+  margin-bottom:50px ;
+  max-height: 75vh;
 }

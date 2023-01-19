@@ -12,3 +12,21 @@
   overflow-y: hidden;
 
 }
+
+.alert{
+  color: #C64552;
+  font-size: 15px;
+  padding: 3px;
+  margin: 0px;
+}
+
+
+.form-add{
+
+height: 500px;
+
+}
+
+:host ::ng-deep .mat-mdc-dialog-content {
+  max-height: 75vh;
+}

@@ -12,64 +12,109 @@
   </div>
 </div>
 <div class="addProduct" mat-dialog-content>
-  <form (ngSubmit)="addNewProduct(newProduct.value)" #newProduct="ngForm">
+  <form class="form-add" (submit)="addNewProduct()" [formGroup]="registerForm">
+    <br />
+    <div class="form-group">
+      <input
+        class="form-control"
+        id="title"
+        name="title"
+        type="text"
+        style="border-radius: 5px"
+        placeholder="Title"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls['title'].errors
+        }"
+        formControlName="title"
+      />
+
+      <div
+        *ngIf="submitted && registerForm.controls['title'].errors"
+        class="text-danger"
+      >
+        <div
+          *ngIf="submitted && registerForm.controls['title'].errors['required']"
+        >
+          Title is required
+        </div>
+      </div>
+    </div>
     <br />
 
-    <!--       <label for="title">Title</label> -->
-    <input
-      class="form-control"
-      id="title"
-      ngModel
-      name="title"
-      type="text"
-      style="border-radius: 5px"
-      placeholder="Title"
-    />
-    <br />
-    <!--   <label for="price">Price</label> -->
-    <input
-      class="form-control"
-      id="price"
-      ngModel
-      name="price"
-      type="text"
-      style="border-radius: 5px"
-      placeholder="Price"
-    />
-    <br />
-    <!--      <label for="image">Image</label>
- -->
-    <input
-      class="form-control"
-      id="image"
-      ngModel
-      name="image"
-      type="text"
-      style="border-radius: 5px"
-      placeholder="Image"
-    />
+    <div class="form-group">
+      <input
+        class="form-control"
+        id="price"
+        name="price"
+        type="text"
+        style="border-radius: 5px"
+        placeholder="Price"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls['price'].errors
+        }"
+        formControlName="price"
+      />
+
+      <div
+        *ngIf="submitted && registerForm.controls['price'].errors"
+        class="text-danger"
+      >
+        <div
+          *ngIf="submitted && registerForm.controls['price'].errors['required']"
+        >
+          Price is required
+        </div>
+      </div>
+    </div>
     <br />
 
-    <!--  <label for="category">Choose a Category:</label>  -->
+    <div class="form-group">
+      <input
+        class="form-control"
+        id="image"
+        name="image"
+        type="text"
+        style="border-radius: 5px"
+        placeholder="image"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls['image'].errors
+        }"
+        formControlName="image"
+      />
 
-    <select class="form-control" name="category" id="cars" ngModel>
+      <div
+        *ngIf="submitted && registerForm.controls['image'].errors"
+        class="text-danger"
+      >
+        <div
+          *ngIf="submitted && registerForm.controls['image'].errors['required']"
+        >
+          Image is required
+        </div>
+      </div>
+    </div>
+    <br />
+<div class="form-group">
+    <label for="category">Choose a Category:</label>
+
+    <select class="form-control" name="category" id="cars" ngModel formControlName="category">
       <option value="">Select Category</option>
       <option value="phone">Phone</option>
       <option value="computer">Computer</option>
       <option value="tablet">Tablet</option>
     </select>
+  </div>
     <br />
     <button
       class="btn btn-primary form-control"
       type="submit"
       mat-button
-      mat-dialog-close
+    
     >
       confirm
     </button>
 
-    <p style="color: red;">{{ msg }}</p>
+    <p style="color: red">{{ msg }}</p>
   </form>
-  <br>
-
+  <br />
 </div>

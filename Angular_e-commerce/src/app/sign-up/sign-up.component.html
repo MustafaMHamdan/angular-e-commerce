@@ -1,55 +1,118 @@
 <div class="up-body">
-<!--   <div class="logo">
-    <img
-      src="https://blulogix.com/wp-content/uploads/2018/10/ico-file.gif"
-      style="width: 50px; height: 50px"
-    />
-  </div> -->
-
   <div class="container">
     <div class="title">Create Account</div>
 
-    <form
-      class="signIn-form"
-      (ngSubmit)="signUp(signUpform.value)"
-      #signUpform="ngForm"
-    >
-      <label for="username">User Name</label>
-      <input
-        class="form-control test"
-        #username
-        required
-        id="userName"
-        ngModel
-        name="userName"
-      />
+    <form (submit)="signUp()" [formGroup]="registerForm">
+      <div class="form-group">
+        <label for="userName">User Name</label>
+
+        <input
+          id="userName"
+          #Myname
+          class="form-control"
+          type="text"
+          [ngClass]="{
+            'is-invalid': registerForm.controls['userName'].touched && registerForm.controls['userName'].errors
+          }"
+          formControlName="userName"
+        />
+        <div
+          *ngIf="registerForm.controls['userName'].touched && registerForm.controls['userName'].errors"
+          class="text-danger"
+        >
+          <div
+            *ngIf="
+            registerForm.controls['userName'].touched && registerForm.controls['userName'].errors['required']
+            "
+          >
+            User Name is required
+          </div>
+        </div>
+      </div>
       <br />
-      <label for="phone">Phone Number</label>
-      <input class="form-control test" id="phone" ngModel name="phone" />
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          class="form-control"
+          id="phone"
+          name="phone"
+          formControlName="phone"
+        />
+      </div>
+
       <br />
-      <label for="email">Email</label>
-      <input
-        class="form-control test"
-        id="email"
-        ngModel
-        name="email"
-        type="email"
-      />
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          [ngClass]="{
+            'is-invalid':  registerForm.controls['email'].touched && registerForm.controls['email'].errors
+          }"
+          formControlName="email"
+          class="form-control"
+          id="email"
+          type="email"
+        />
+
+        <div
+          *ngIf=" registerForm.controls['email'].touched && registerForm.controls['email'].errors"
+          class="text-danger"
+        >
+          <div
+            *ngIf="
+            registerForm.controls['email'].touched && registerForm.controls['email'].errors['required']
+            "
+          >
+            Email Address is required
+          </div>
+          <div
+            *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors['email']"
+          >
+            Email Address is not Valid
+          </div>
+        </div>
+      </div>
       <br />
-      <label for="password">Password</label>
-      <input
-        class="form-control test"
-        id="password"
-        ngModel
-        name="password"
-        type="password"
-      />
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          [ngClass]="{
+            'is-invalid': registerForm.controls['password'].touched && registerForm.controls['password'].errors
+          }"
+          formControlName="password"
+          class="form-control"
+          id="password"
+          type="password"
+        />
+
+        <div
+          *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors"
+          class="text-danger"
+        >
+          <div
+            *ngIf="
+            registerForm.controls['password'].touched && registerForm.controls['password'].errors['required']
+            "
+          >
+            Password is required
+          </div>
+          <div
+            *ngIf="
+            registerForm.controls['password'].touched && registerForm.controls['password'].errors['minlength']
+            "
+          >
+            Password should be at least 6 characters
+          </div>
+        </div>
+      </div>
       <br />
-      <button class="btn btn-primary" type="submit">Sign-Up</button>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Sign-Up</button>
+      </div>
     </form>
-    <br>
+    <br />
+
     <div>
-      <p style="color: red;">{{ msg }}</p>
+      <p style="color: red">{{ msg }}</p>
 
       <a href="/login">Do You have An Account ?Login! </a>
     </div>

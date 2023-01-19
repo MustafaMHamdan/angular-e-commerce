@@ -21,16 +21,25 @@
     #editedProduct="ngForm"
   >
     <br />
-    <!-- <label for="title">Title</label> -->
-    <input class="form-control" id="title"  [(ngModel)]="data.title" name="title" type="text" placeholder="title" />
+    <label for="title">Title</label>
+    <input class="form-control" id="title"  [(ngModel)]="data.title" name="title"  type="text" placeholder="title"   required/>
+    <div *ngIf="data.title.invalid && (data.title.dirty ||data.title.touched)" class="alert">
+      Title is required.
+    </div>
     <br />
-   <!--  <label for="price">Price</label> -->
+    <label for="price">Price</label>
     <input class="form-control" id="price" [(ngModel)]="data.price" name="price" type="text"  placeholder="price" />
+    <!-- <div *ngIf="price.invalid && (price.dirty ||price.touched)" class="alert">
+      Price is required.
+    </div> -->
     <br />
-   <!--  <label for="image">Image</label> -->
+    <label for="image">Image</label>
     <input class="form-control" id="image" [(ngModel)]="data.image" name="image" type="text"  placeholder="image"/>
+   <!--  <div *ngIf="image.invalid && (image.dirty ||image.touched)" class="alert">
+      Image is required.
+    </div> -->
     <br />
-     <label for="category">Category</label> 
+     <label for="category">Category</label>
     <select  class="form-control" name="category" id="category"   [(ngModel)]="data.category" name="category">
 
       <option value="phone">Phone</option>

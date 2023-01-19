@@ -1,26 +1,68 @@
 <div class="container">
   <div class="title">Login</div>
 
-  <form (ngSubmit)="signIn(SignIn.value)" #SignIn="ngForm">
+  <form (submit)="signIn()" [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls['email'].errors
+        }"
+        formControlName="email"
+        class="form-control"
+        id="email"
+        type="email"
+      />
+
+      <div
+        *ngIf="submitted && registerForm.controls['email'].errors"
+        class="text-danger"
+      >
+        <div
+          *ngIf="submitted && registerForm.controls['email'].errors['required']"
+        >
+          Email Address is required
+        </div>
+        <div
+          *ngIf="submitted && registerForm.controls['email'].errors['email']"
+        >
+          Email Address is not Valid
+        </div>
+      </div>
+    </div>
     <br />
-    <label for="email" required>Email</label>
-    <input
-      class="form-control test"
-      #email
-      id="email"
-      ngModel
-      name="email"
-      type="email"
-    />
-    <br />
-    <label for="password">Password</label>
-    <input
-      class="form-control test"
-      id="password"
-      ngModel
-      name="password"
-      type="password"
-    />
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls['password'].errors
+        }"
+        formControlName="password"
+        class="form-control"
+        id="password"
+        type="password"
+      />
+
+      <div
+        *ngIf="submitted && registerForm.controls['password'].errors"
+        class="text-danger"
+      >
+        <div
+          *ngIf="
+            submitted && registerForm.controls['password'].errors['required']
+          "
+        >
+          Password is required
+        </div>
+        <div
+          *ngIf="
+            submitted && registerForm.controls['password'].errors['minlength']
+          "
+        >
+          Password should be at least 6 characters
+        </div>
+      </div>
+    </div>
     <br />
     <button class="btn btn-primary" type="submit">Sign-In</button>
   </form>

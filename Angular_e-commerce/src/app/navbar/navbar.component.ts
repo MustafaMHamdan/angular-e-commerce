@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartserviceService } from '../cartservice.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CartserviceService } from '../cartservice.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private cartService: CartserviceService) {}
+  constructor(private cartService: CartserviceService,private route: Router) {}
   total: number = 0;
   myCarts: any;
   public searchTerm !: string;
@@ -39,7 +40,8 @@ this.cartService.search.next(this.searchTerm);
 
 checkLogin(){
 if(!this.token)
-{alert('please login first')}
+{alert('Please login first');
+this.route.navigate(['/login']);}
 }
 
 
