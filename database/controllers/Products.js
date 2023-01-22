@@ -7,11 +7,11 @@ const addProduct = (req, res) => {
   const query = `INSERT INTO products (title,price, image ,category,SellerId) VALUES (?,?,?,?,?)`;
   const data = [title, price, image, category, SellerId];
   connection.query(query, data, (err, result) => {
-    /* if (title == "") {
-      return res.status(409).json({
-        massage: "Product title required",
+    if (title.length == 1) {
+      return res.status(203).json({
+        massage: "Product title is inappropriate",
       });
-    } else if (price == "") {
+    }  /*else if (price == "") {
       return res.status(409).json({
         massage: " ! Product price required ",
       });
@@ -38,9 +38,9 @@ const addProduct = (req, res) => {
       });
     }
 
-    return res.status(200).json({
+    return res.status(201).json({
       success: true,
-
+      massage: "Your Product has been added successfully",
       result: data,
     });
   });
@@ -126,7 +126,7 @@ const deleteProduct = (req, res) => {
         err: err,
       });
     }
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       massage: `Succeeded to delete project with id: ${id}`,
       result: result,
@@ -199,7 +199,7 @@ const addToCart = (req, res) => {
 
       connection.query(query4, data4, (err, result3) => {
         if (result3) {
-          return res.status(201).json({
+          return res.status(200).json({
             message: "quantity updated",
           });
         }
@@ -216,7 +216,7 @@ const addToCart = (req, res) => {
           });
         }
         if (res2) {
-          return res.status(201).json({
+          return res.status(200).json({
             success: true,
             massage: "the product has been added to cart successfully",
             result: res2,

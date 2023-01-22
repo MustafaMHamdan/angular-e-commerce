@@ -62,7 +62,7 @@ const addToCart = (req, res) => {
 
       connection.query(query4, data4, (err, result3) => {
         if (result3) {
-          return res.status(201).json({
+          return res.status(200).json({
             message: "quantity updated",
           });
         }
@@ -79,7 +79,7 @@ const addToCart = (req, res) => {
           });
         }
         if (res2) {
-          return res.status(201).json({
+          return res.status(200).json({
             success: true,
             massage: "the product has been added to cart successfully",
             result: res2,
@@ -110,7 +110,7 @@ const removeItem = (req, res) => {
 connection.query(query, data, (err, results) =>{ 
 console.log(result);
   if (results){
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       massage: "updated",
      })

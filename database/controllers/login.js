@@ -26,9 +26,9 @@ const login = (req, res) => {
           return res.status(200).json({ token, result });
         }
       } else {
-        return res.status(403).json({
+        return res.status(401).json({
           success: false,
-          message: `The password you’ve entered is incorrect`,
+          massage: `The password you’ve entered is incorrect`,
         });
       }
 
@@ -36,7 +36,7 @@ const login = (req, res) => {
     } else {
       return res
         .status(404)
-        .json({ success: false, message: "The email doesn't exist" });
+        .json({ success: false,  massage: "The email doesn't exist"  });
     }
   });
 };

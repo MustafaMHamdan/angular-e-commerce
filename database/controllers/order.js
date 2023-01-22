@@ -21,7 +21,7 @@ const checkOrder = (req, res) => {
 
     connection.query(query, data, (err, result2) => {
       if (result2.affectedRows) {
-        return res.status(201).json({
+        return res.status(200).json({
           result2,
         });
       }
