@@ -21,15 +21,17 @@ export class NavbarComponent {
   }
 
   getCartItems() {
+
     return this.cartService.getCartProducts().subscribe((res) => {
       this.myCarts = res.cartProducts;
 
       this.total = this.myCarts.reduce((accumulator: number, element: any) => {
         return accumulator + element.quantity;
       }, 0);
-
       this.getCartItems();
+
     });
+
   }
 
   search(event: any) {
@@ -46,6 +48,6 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-    this.getCartItems();
+    /*  this.getCartItems();  */
   }
 }

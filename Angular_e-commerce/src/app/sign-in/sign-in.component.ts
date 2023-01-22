@@ -18,7 +18,7 @@ export class SignInComponent implements AfterViewInit {
     private route: Router,
     private formBuilder: FormBuilder
   ) {}
-  @ViewChild('Myemail') emailF!: ElementRef<HTMLInputElement>;
+
   msg: any = '';
   errorMsg: any = '';
   massage: any = '';
@@ -32,8 +32,7 @@ export class SignInComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.emailF.nativeElement.focus();
-  }
+   }
   signIn() {
     this.registerForm.markAllAsTouched();
     console.log(this.registerForm.value);
@@ -61,7 +60,7 @@ export class SignInComponent implements AfterViewInit {
 
           console.log(v);
         },
-        error: (e) => (this.msg = e.error.message),
+        error: (e) => (/* this.msg = e.error.message */ console.log(e)),
         complete: () => console.info('complete'),
       });
   }

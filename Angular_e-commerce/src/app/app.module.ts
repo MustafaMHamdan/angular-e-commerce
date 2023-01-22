@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from './auth/auth.service'
+import { AuthService } from './auth/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AuthGuard } from './auth/auth.guard'
- import { Routes,RouterModule } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CommonModule } from '@angular/common';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -14,29 +15,37 @@ import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule ,HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpErrorResponse,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { CartserviceService } from './cartservice.service';
 import { PastOrdersComponent } from './past-orders/past-orders.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { FilterPipe } from './filter.pipe';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { httpInterceptorProviders } from './Interceptors/index';
 
-const appRoutes:Routes=[
-  {path:'', redirectTo:'products',pathMatch:'full'},
-{path:"products",component:ProductsComponent },
-{path:"cart",component:CartComponent,canActivate:[AuthGuard] },
-{path:"login",component:SignInComponent },
-{path:"signup",component:SignUpComponent },
-{path:"order",component:OrdersComponent,canActivate:[AuthGuard] },
-{path:"orders-history",component:PastOrdersComponent,canActivate:[AuthGuard] }
-,
-]
-  @NgModule({
+const appRoutes: Routes = [
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'products', component: ProductsComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: SignInComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'order', component: OrdersComponent, canActivate: [AuthGuard] },
+  {
+    path: 'orders-history',
+    component: PastOrdersComponent,
+    canActivate: [AuthGuard],
+  },
+];
+@NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -52,15 +61,24 @@ const appRoutes:Routes=[
     AutoFocusDirective,
     FilterPipe,
     OrderDetailsComponent,
-
-   ],
+  ],
   imports: [
-    BrowserModule,RouterModule.forRoot(appRoutes),MatDialogModule,MatFormFieldModule,ReactiveFormsModule,
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
+    MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
 
     FormsModule,
-    HttpClientModule
+    HttpClientModule,BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [AuthService, AuthGuard,CartserviceService],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    AuthGuard,
+    CartserviceService,
+    httpInterceptorProviders,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
