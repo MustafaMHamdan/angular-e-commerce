@@ -12,7 +12,7 @@ import { ProductsService } from '../products.service';
 })
 export class ProductDialogComponent {
   registerForm!: FormGroup;
- 
+
   constructor(
     private api: ProductsService,
     public dialogRef: MatDialogRef<ProductDialogComponent>,
@@ -41,6 +41,8 @@ export class ProductDialogComponent {
     }
 
     this.api.addToProduct(this.registerForm.value).subscribe((res) => {
+      console.log(res);
+
       this.dialogRef.close()
     });
   }

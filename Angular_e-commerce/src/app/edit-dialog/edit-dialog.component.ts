@@ -12,32 +12,24 @@ export class EditDialogComponent {
   token: any = localStorage.getItem('token');
   registerForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public _HttpClient: HttpClient ,
+    public _HttpClient: HttpClient,
     private formBuilder: FormBuilder
   ) {}
-
-
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       price: ['', [Validators.required]],
       image: ['', [Validators.required]],
-      category: ['',[Validators.required]]
+      category: ['', [Validators.required]],
     });
   }
 
-
   editProduct() {
-
     this.registerForm.markAllAsTouched();
-
-
-
 
     this._HttpClient
       .put(

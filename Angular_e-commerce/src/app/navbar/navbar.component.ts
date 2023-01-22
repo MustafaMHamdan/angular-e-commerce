@@ -48,6 +48,6 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-    /*  this.getCartItems();  */
+     /*  this.getCartItems(); */
   }
 }

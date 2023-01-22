@@ -18,8 +18,6 @@ export class DeleteDialogComponent {
 
   token: any = localStorage.getItem('token');
 
-
-
   deleteProduct() {
     this._HttpClient
       .delete(`http://localhost:5000/products/${this.data.id}`, {

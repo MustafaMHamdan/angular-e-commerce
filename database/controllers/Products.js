@@ -8,8 +8,9 @@ const addProduct = (req, res) => {
   const data = [title, price, image, category, SellerId];
   connection.query(query, data, (err, result) => {
     if (title.length == 1) {
-      return res.status(203).json({
-        massage: "Product title is inappropriate",
+      return res.status(201).json({
+        success: true,
+        massage: "Product title is too short",
       });
     }  /*else if (price == "") {
       return res.status(409).json({
@@ -126,7 +127,7 @@ const deleteProduct = (req, res) => {
         err: err,
       });
     }
-    res.status(201).json({
+    res.status(202).json({
       success: true,
       massage: `Succeeded to delete project with id: ${id}`,
       result: result,
@@ -172,7 +173,7 @@ const updateProduct = (req, res) => {
       connection.query(query2, data2, (err, result2) => {
         console.log(result2);
         if (result2.affectedRows != 0)
-          return res.status(201).json({
+          return res.status(202).json({
             success: true,
             massage: `Product updated`,
             result: result2,

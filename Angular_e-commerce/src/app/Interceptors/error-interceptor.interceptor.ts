@@ -24,23 +24,27 @@ export class ErrorInterceptorInterceptor implements HttpInterceptor {
           } else {
             switch (error.status) {
               case 401:
-                console.log(error.statusText);
+                console.log(error);
                 this.toastr.error(`${error.error.massage} `);
                 break;
               case 403:
-                console.log(error.statusText);
-                this.toastr.error(`${error.error.massage} `);
+                console.log(error.error.message);
+                this.toastr.error(`${error.error.message} `);
                 break;
               case 404:
-                console.log(error.statusText);
-                this.toastr.error(`${error.error.massage} `);
+                console.log(error)
+                this.toastr.error(`${error.error} `);
                 break;
               case 409:
-                console.log(error.statusText);
+                console.log(error);
                 this.toastr.error(`${error.error.massage} `);
                 break;
+                case 500:
+                  console.log(error);
+                  this.toastr.error(`${error.error.massage}`);
+                  break;
               case 503:
-                console.log(error.statusText);
+                console.log(error);
                 this.toastr.error(`${error.error.massage}`);
                 break;
             }
