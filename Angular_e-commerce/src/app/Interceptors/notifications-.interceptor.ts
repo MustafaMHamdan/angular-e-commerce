@@ -5,8 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, catchError, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
@@ -17,66 +18,37 @@ export class NotificationsInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(request);
+    return next.handle(request).pipe(
+      map((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          if (event.status != 200 && event.body) {
+            if (request.url.endsWith('products')) {
+              if (event.body.result[0].length == 1) {
+             /*    this.toastr.warning('Your Product Title is too short'); */
+        console.log('Your Product Title is too short');
 
-    if (request.url.endsWith('products')) {
-      return next.handle(request).pipe(
-        map((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            if (event.status == 201 && event.body) {
-              console.log(request.body.title);
-
-              if (request.body.title.length == 1) {
-                this.toastr.warning('short title ');
+              } else {
+                console.log(event.body.massage);
+           /*      this.toastr.success(event.body.massage); */
               }
-              else
-              {this.toastr.success('your product has been added successfully');}
+            } else { console.log(event.body.massage);
+             /*  this.toastr.success(event.body.massage); */
             }
           }
-          return event;
-        })
-      );
-    } else if (request.url.endsWith('orders')) {
-      return next.handle(request).pipe(
-        map((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            if (event.status == 201 && event.body) {
+        }
 
-
-              this.toastr.success('your order has been submitted');
-            }
+        return event;
+      }),
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.log('event error');
+          } else {
+            this.toastr.error(`${error.error.massage} `);
           }
-
-          return event;
-        })
-      );
-    } else if (request.method === 'DELETE') {
-      return next.handle(request).pipe(
-        map((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            if (event.status == 202 && event.body) {
-              this.toastr.success('your product has been deleted successfully');
-            }
-          }
-          return event;
-        })
-      );
-    } else if (request.method === 'PUT') {
-      return next.handle(request).pipe(
-        map((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            if (event.status == 202 && event.body) {
-              console.log(request);
-
-              this.toastr.success('your product has been updated successfully');
-            }
-          }
-          return event;
-        })
-      );
-    } 
-    console.log(request);
-
-    return next.handle(request);
+        }
+        return throwError(() => new Error(error.statusText));
+      })
+    );
   }
 }

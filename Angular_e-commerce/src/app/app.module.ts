@@ -17,7 +17,7 @@ import { CartComponent } from './cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   HttpClientModule,
-  HttpErrorResponse,
+
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
@@ -30,7 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { FilterPipe } from './filter.pipe';
 import { OrderDetailsComponent } from './order-details/order-details.component';
-import { httpInterceptorProviders } from './Interceptors/index';
+import { NotificationsInterceptor } from './Interceptors/notifications-.interceptor';
+import { NotificationComponent } from './notification/notification.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     AutoFocusDirective,
     FilterPipe,
     OrderDetailsComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,11 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuard,
     CartserviceService,
-    httpInterceptorProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotificationsInterceptor,
+      multi: true
+  },
   ],
   bootstrap: [AppComponent],
 })
