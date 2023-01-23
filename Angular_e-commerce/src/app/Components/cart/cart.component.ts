@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CartserviceService } from '../cartservice.service';
+import { CartserviceService } from '../../services/cartservice.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -19,7 +19,7 @@ export class CartComponent {
   total: number = 0;
   token: any = localStorage.getItem('token');
   public grandTotal !: number;
-  
+
   getCartItems() {
     return this.cartService.getCartProducts().subscribe((res) => {
       this.allCartProducts = res;

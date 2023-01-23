@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { ProductDialogComponent } from '../../Dialogs/product-dialog/product-dialog.component';
+import { DeleteDialogComponent } from '../../Dialogs/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from '../../Dialogs/edit-dialog/edit-dialog.component';
 
-import { CartserviceService } from '../cartservice.service';
-import { ProductsService } from '../products.service';
+import { CartserviceService } from '../../services/cartservice.service';
+import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 
 @Component({

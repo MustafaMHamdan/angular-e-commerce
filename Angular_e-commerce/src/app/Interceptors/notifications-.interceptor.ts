@@ -24,15 +24,15 @@ export class NotificationsInterceptor implements HttpInterceptor {
           if (event.status != 200 && event.body) {
             if (request.url.endsWith('products')) {
               if (event.body.result[0].length == 1) {
-             /*    this.toastr.warning('Your Product Title is too short'); */
-        console.log('Your Product Title is too short');
-
+                this.toastr.warning('Your Product Title is too short');
+                console.log('Your Product Title is too short');
               } else {
                 console.log(event.body.massage);
-           /*      this.toastr.success(event.body.massage); */
+                this.toastr.success(event.body.massage);
               }
-            } else { console.log(event.body.massage);
-             /*  this.toastr.success(event.body.massage); */
+            } else {
+              console.log(event.body.massage);
+              this.toastr.success(event.body.massage);
             }
           }
         }

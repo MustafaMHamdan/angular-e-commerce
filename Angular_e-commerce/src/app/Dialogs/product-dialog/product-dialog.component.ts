@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ProductsService } from '../products.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-dialog',
