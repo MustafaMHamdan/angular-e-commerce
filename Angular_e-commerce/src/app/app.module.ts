@@ -58,7 +58,7 @@ const appRoutes: Routes = [
     DeleteDialogComponent,
     EditDialogComponent,
     PastOrdersComponent,
- 
+
     FilterPipe,
     OrderDetailsComponent,
     NotificationComponent,
