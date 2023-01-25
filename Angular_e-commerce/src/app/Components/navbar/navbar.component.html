@@ -1,9 +1,9 @@
 <header>
-  <div class="navbar navbar-dark bg-primary shadow-sm">
+  <div class="navbar navbar-dark bg-dark">
     <div class="navbar-brand align-item-center d-flex">
       <i style="font-size: 40px" class="fas fa-shipping-fast">&nbsp; </i>
       <strong class="logo" style="font-size: 30px" routerLink="products"
-        >BLULOGIX</strong
+        >DARK  <span style="color:red" >ELECTRO</span>    </strong
       >
       <div class="form-group">
         <input
@@ -46,9 +46,10 @@
           *ngIf="role != 1"
           (click)="checkLogin()"
           routerLink="cart"
-          class="btn btn-primary"
+          class="btn btn-danger"
+          style="background-color: transparent;border: none;"
         >
-          <i style="font-size: 30px" class="fas fa-cart-plus"></i>
+          <i style="font-size: 30px ;background-color: transparent;" class="fas fa-cart-plus"></i>
           <div style="font-size: 10px" class="badge bg-danger">{{ total }}</div>
         </button>
       </div>

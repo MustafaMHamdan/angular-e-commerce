@@ -57,16 +57,12 @@ export class NotificationsInterceptor implements HttpInterceptor {
       }),
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
-          if (error.error instanceof ErrorEvent ) {
+          if (error.error instanceof ErrorEvent) {
             console.log('event error');
-          }
-          else if(error.status==403)
-{
-  console.log('event error');
-}
-
-
-          else { console.log(error.status);
+          } else if (error.status == 403) {
+            console.log('event error');
+          } else {
+            console.log(error.status);
 
             this.alertService.create(
               'error',
