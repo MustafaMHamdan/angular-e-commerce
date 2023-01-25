@@ -7,12 +7,13 @@ const addProduct = (req, res) => {
   const query = `INSERT INTO products (title,price, image ,category,SellerId) VALUES (?,?,?,?,?)`;
   const data = [title, price, image, category, SellerId];
   connection.query(query, data, (err, result) => {
-    if (title.length == 1) {
+    console.log(result);
+    /*   if (title.length == 1) {
       return res.status(201).json({
-        success: true,
+        success: false,
         massage: "Product title is too short",
       });
-    }  /*else if (price == "") {
+    }  */ /*else if (price == "") {
       return res.status(409).json({
         massage: " ! Product price required ",
       });
@@ -41,7 +42,7 @@ const addProduct = (req, res) => {
 
     return res.status(201).json({
       success: true,
-      massage: "Your Product has been added successfully",
+      massage: `${data[0]}  has been added successfully`,
       result: data,
     });
   });
@@ -53,7 +54,6 @@ const getAllProducts = (req, res) => {
   const query = "select * from products where is_deleted =0 ";
 
   connection.query(query, (err, result) => {
-    console.log(result);
     if (err) {
       return res.status(500).json({
         success: false,
@@ -108,30 +108,59 @@ const getProductById = (req, res) => {
 const deleteProduct = (req, res) => {
   const id = req.params.id;
   const userId = req.token.userId;
-  const query = `UPDATE products SET is_deleted=1  where productID=? AND SellerId=? ;`;
 
-  const data = [id, userId];
+  const query2 = "select * from products where productID=? AND is_deleted =0 ";
+  const data2 = [id];
 
-  connection.query(query, data, (err, result) => {
+  connection.query(query2, data2, (err, result) => {
+    console.log(result);
+  
+    if (result.length == 0) 
+    {
+      return res.status(500).json({
+        success: false,
+        massage: 'Product not found',
+      });
+    }
+
+
+
     if (err) {
       return res.status(500).json({
         success: false,
-        massage: "Server Error",
-        err: err,
+        err: err.message,
       });
     }
-    if (!result.changedRows) {
-      return res.status(404).json({
-        success: false,
-        massage: `The Product: ${id} is not found`,
-        err: err,
+
+    if (result.length > 0) {
+      const t = result[0].title;
+      const query = `UPDATE products SET is_deleted=1  where productID=? AND SellerId=? ;`;
+
+      const data = [id, userId];
+
+      connection.query(query, data, (err, result) => {
+        console.log(result);
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            massage: "Server Error",
+            err: err.message,
+          });
+        }
+        if (!result.changedRows) {
+          return res.status(404).json({
+            success: false,
+            massage: `The Product: is not found`,
+            err: err,
+          });
+        }
+        res.status(202).json({
+          success: true,
+          massage: ` ${t} has been deleted `,
+          result: result,
+        });
       });
     }
-    res.status(202).json({
-      success: true,
-      massage: `Succeeded to delete project with id: ${id}`,
-      result: result,
-    });
   });
 };
 
@@ -160,7 +189,6 @@ const updateProduct = (req, res) => {
         err: err,
       });
     } else {
-      console.log(result);
       const query2 = `UPDATE products SET title=?, price=?, image=? ,category=? WHERE productID=?;`;
       const data2 = [
         title || result[0].title,
@@ -171,11 +199,10 @@ const updateProduct = (req, res) => {
       ];
 
       connection.query(query2, data2, (err, result2) => {
-        console.log(result2);
         if (result2.affectedRows != 0)
           return res.status(202).json({
             success: true,
-            massage: `Product updated`,
+            massage: ` ${data2[0]} updated`,
             result: result2,
           });
       });

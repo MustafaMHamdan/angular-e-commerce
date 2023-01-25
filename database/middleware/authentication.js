@@ -11,7 +11,7 @@ const authentication = (req, res, next) => {
       if (err) {
         res.status(403).json({
           success: false,
-          message: `The token is invalid or expired`,
+          massage: `The token is invalid or expired`,
         });
       } else {
         req.token = result;
@@ -19,7 +19,7 @@ const authentication = (req, res, next) => {
       }
     });
   } catch (error) {
-    res.status(403).json({ message: "forbidden" });
+    res.status(403).json({ massage: "forbidden" });
   }
 };
 

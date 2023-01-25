@@ -9,7 +9,7 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
   token: any = localStorage.getItem('token');
   getProduct() {
-    return this.http.get<any>('http://localhost:5000/produc').pipe(
+    return this.http.get<any>('http://localhost:5000/products').pipe(
       map((res: any) => {
         return res;
       })

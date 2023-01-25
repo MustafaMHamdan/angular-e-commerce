@@ -9,7 +9,14 @@ const login = (req, res) => {
   const query = `SELECT * FROM users  WHERE email=?`;
   const data = [email];
   connection.query(query, data, (err, result) => {
-    if (err) throw err;
+    if (err) {
+
+      return res.status(403).json({
+        success: false,
+        massage: err.message,
+      });
+
+    };
     if (result.length > 0) {
       /////////////
       const payload = {

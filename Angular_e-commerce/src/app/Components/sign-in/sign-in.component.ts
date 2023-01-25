@@ -60,7 +60,7 @@ export class SignInComponent implements AfterViewInit {
 
           console.log(v);
         },
-        error: (e) => (/* this.msg = e.error.message */ console.log(e)),
+        error: (e) => (/* this.msg = e.error.message */ console.log(e.message)),
         complete: () => console.info('complete'),
       });
   }

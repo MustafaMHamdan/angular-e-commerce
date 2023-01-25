@@ -74,6 +74,7 @@ const submitOrder = (req, res) => {
           connection.query(query, data2, (err, result) => {
             return res.status(201).json({
               result,
+              massage:'Your Order has Been submitted successfully  '
             });
           });
         });
