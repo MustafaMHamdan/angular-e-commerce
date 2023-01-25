@@ -31,16 +31,13 @@ export class NotificationsInterceptor implements HttpInterceptor {
                 this.alertService.create(
                   'warning',
                   'info',
-                  5000,
                   `Your Product Title is too short`
                 );
               } else {
                 console.log(event.body.massage);
-
                 this.alertService.create(
                   'Success',
                   'success',
-                  5000,
                   `${event.body.massage}`
                 );
               }
@@ -50,7 +47,6 @@ export class NotificationsInterceptor implements HttpInterceptor {
               this.alertService.create(
                 'Success',
                 'success',
-                5000,
                 `${event.body.massage}`
               );
             }
@@ -65,9 +61,8 @@ export class NotificationsInterceptor implements HttpInterceptor {
             console.log('event error');
           } else {
             this.alertService.create(
-              'Error',
+              'error',
               'danger',
-              5000,
               `${error.error.massage}`
             );
           }

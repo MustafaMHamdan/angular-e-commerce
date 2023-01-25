@@ -1,24 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AlertService } from './alert.service';
-import { trigger, transition, style, animate } from '@angular/animations';
+
 import { Alert } from './alert-Interface';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({ transform: 'scale3d(.3, .3, .3)' }),
-        animate(100),
-      ]),
-      transition(
-        'void => *',
-        animate(100, style({ transform: 'scale3d(.3, .3, .3)' }))
-      ),
-    ]),
-  ],
 })
 export class NotificationComponent implements OnInit {
   //hide and show alert
@@ -27,12 +15,13 @@ export class NotificationComponent implements OnInit {
   //custom settings
   title!: string;
   type!: string;
-  time!: number;
+
   body!: string;
 
   //default settings
-  backColor!: string;
-
+  titleColor!: string;
+  bodyColor!: string;
+  fontColor!: string;
   constructor(private alertService: AlertService) {}
   alertResponse: boolean = false;
 
@@ -40,24 +29,29 @@ export class NotificationComponent implements OnInit {
     this.alertService.alertSettings$.subscribe((data: Alert) => {
       this.title = data.title;
       this.type = data.type;
-      this.time = data.time;
-      this.body = data.body;
 
+      this.body = data.body;
       if (this.type == 'danger') {
-        this.backColor = '#dc3545';
+        this.titleColor = '#FD6767';
+        this.bodyColor = '#FDE8E8';
+        this.fontColor = '#FD9392';
       }
       if (this.type == 'info') {
-        this.backColor = '#a1930f';
+        this.titleColor = '#DCAE6A';
+        this.bodyColor = '#FDF2E4';
+        this.fontColor = '#D49D49';
       }
       if (this.type == 'success') {
-        this.backColor = '#28a745';
+        this.titleColor = '#47B895';
+        this.bodyColor = '#E5F8F1';
+        this.fontColor = '#43B792';
       }
       //show alert
       this.modalStatus = true;
 
       setTimeout(() => {
         this.modalStatus = false;
-      }, 2000);
+      }, 3000);
     });
   }
 }

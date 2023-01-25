@@ -7,7 +7,7 @@ import { CartserviceService } from '../../services/cartservice.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent  {
   constructor(private cartService: CartserviceService, private route: Router) {}
   total: number = 0;
   myCarts: any;
@@ -48,6 +48,6 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-     /*   this.getCartItems(); */
+         this.getCartItems();
   }
 }

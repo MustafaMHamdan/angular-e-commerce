@@ -2,7 +2,7 @@
   <div class="container">
     <div class="title">Create Account</div>
 
-    <form (submit)="signUp()" [formGroup]="registerForm">
+    <form (submit)="signUp()" [formGroup]="registerForm" autocomplete="off">
       <div class="form-group">
         <label for="userName">*User Name</label>
         <input

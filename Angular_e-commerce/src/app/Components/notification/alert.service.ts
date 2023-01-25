@@ -11,11 +11,10 @@ export class AlertService {
 
   constructor() {}
 
-  create(title: string, type: string, time: number, body: string) {
+  create(title: string, type: string, body: string) {
     this.alertSettings$.next({
       title,
       type,
-      time,
       body,
     });
   }

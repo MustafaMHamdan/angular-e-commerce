@@ -29,7 +29,7 @@ export class ProductDialogComponent {
       title: ['', [Validators.required]],
       price: ['', [Validators.required]],
       image: ['', [Validators.required]],
-      category: ['',[Validators.required]]
+      category: ['', [Validators.required]],
     });
   }
 
@@ -43,7 +43,7 @@ export class ProductDialogComponent {
     this.api.addToProduct(this.registerForm.value).subscribe((res) => {
       console.log(res);
 
-      this.dialogRef.close()
+      this.dialogRef.close();
     });
   }
 }
