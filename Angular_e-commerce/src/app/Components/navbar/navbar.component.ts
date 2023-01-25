@@ -13,6 +13,7 @@ export class NavbarComponent  {
   myCarts: any;
   public searchTerm!: string;
   token: any = localStorage.getItem('token');
+  username:any=localStorage.getItem('userName');
   allCartProducts: any = [];
   totalCart: number = 0;
   role: any = localStorage.getItem('role');
@@ -47,7 +48,8 @@ export class NavbarComponent  {
     }
   }
 
-  ngOnInit() {
+  ngOnInit() {console.log(this.username);
+
          this.getCartItems();
   }
 }

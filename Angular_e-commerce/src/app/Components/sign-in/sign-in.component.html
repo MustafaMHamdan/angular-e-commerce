@@ -3,7 +3,7 @@
 
   <form (submit)="signIn()" [formGroup]="registerForm" autocomplete="off">
     <div class="form-group">
-      <label for="email">*Email</label>
+      <label for="email"><span style="color: red;">*</span>   Email</label>
       <input
         [ngClass]="{
           'is-invalid': registerForm.controls['email'].touched && registerForm.controls['email'].errors
@@ -33,7 +33,7 @@
     </div>
     <br />
     <div class="form-group">
-      <label for="password">*Password</label>
+      <label for="password"><span style="color: red;">*</span>   Password</label>
       <input
         [ngClass]="{
           'is-invalid': registerForm.controls['password'].touched && registerForm.controls['password'].errors
@@ -65,11 +65,11 @@
       </div>
     </div>
     <br />
-    <button class="btn btn-primary" type="submit">Sign-In</button>
+    <button class="btn btn-dark" type="submit">Sign-In</button>
   </form>
   <br />
   <div>
     <p style="color: red">{{ msg }}</p>
-    <a href="/signup">Not registered yet? Create an account!</a>
+    <a style="color: black;" href="/signup">Not registered yet? Create an account!</a>
   </div>
 </div>

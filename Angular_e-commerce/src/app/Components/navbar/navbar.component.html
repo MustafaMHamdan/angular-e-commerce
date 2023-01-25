@@ -3,8 +3,9 @@
     <div class="navbar-brand align-item-center d-flex">
       <i style="font-size: 40px" class="fas fa-shipping-fast">&nbsp; </i>
       <strong class="logo" style="font-size: 30px" routerLink="products"
-        >DARK  <span style="color:red" >ELECTRO</span>    </strong
-      >
+        >DARK <span style="color: red">ELECTRO</span>
+      </strong>
+
       <div class="form-group">
         <input
           type="text"
@@ -14,16 +15,24 @@
           placeholder="search products"
         />
       </div>
+
       <span class="fas fa-search search-icon"></span>
+      <a
+        *ngIf="token"
+        style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        > <span style="color:red">Welcome</span> 
+        {{ username }}</a
+      >
     </div>
+
     <div class="navbar-link">
-      <a *ngIf="!token" class="nav-item nav-link active" routerLink="login"
+      <a *ngIf="!token" class="nav-item nav-link active" href="login"
         >Sign In</a
       >
 
-      <a *ngIf="!token" class="nav-item nav-link active" routerLink="/signup"
-        >Sign Up</a
-      >
+      <a *ngIf="!token" class="nav-item nav-link active" href="signup"
+        >Sign Up
+      </a>
 
       <a
         *ngIf="token"
@@ -31,8 +40,7 @@
         class="nav-item nav-link active"
         href="login"
         >Sign out <i class="fa fa-sign-out" aria-hidden="true"></i>
-        </a
-      >
+      </a>
 
       <a
         *ngIf="token && role != 1"
@@ -41,16 +49,18 @@
         >Orders History</a
       >
 
-
       <div class="icon">
         <button
           *ngIf="role != 1"
           (click)="checkLogin()"
           routerLink="cart"
           class="btn btn-danger"
-          style="background-color: transparent;border: none;"
+          style="background-color: transparent; border: none"
         >
-          <i style="font-size: 30px ;background-color: transparent;" class="fas fa-cart-plus"></i>
+          <i
+            style="font-size: 30px; background-color: transparent"
+            class="fas fa-cart-plus"
+          ></i>
           <div style="font-size: 10px" class="badge bg-danger">{{ total }}</div>
         </button>
       </div>

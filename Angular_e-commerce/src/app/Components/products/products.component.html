@@ -44,7 +44,7 @@
 <div class="wrapper">
   <button
     style="float: right; margin: 15px; border-radius: 50%"
-    class="btn btn-primary"
+    class="btn btn-dark"
     (click)="openDialog('0ms', '0ms')"
     *ngIf="role == 1"
   >
@@ -87,7 +87,7 @@
             </button>
 
             <input
-              style="width: 50px"
+              style="width: 50px; align-items: center; text-align: center"
               *ngIf="role != 1"
               class="input-cas"
               [(ngModel)]="item.counter"

@@ -4,7 +4,7 @@
 
     <form (submit)="signUp()" [formGroup]="registerForm" autocomplete="off">
       <div class="form-group">
-        <label for="userName"  >*User Name</label>
+        <label for="userName"  ><span style="color: red;">*</span>    User Name</label>
         <input
           id="userName"
           autofocus="true"
@@ -30,7 +30,7 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="phone">*Phone Number</label>
+        <label for="phone">Phone Number</label>
         <input
           class="form-control"
           id="phone"
@@ -41,7 +41,7 @@
 
       <br />
       <div class="form-group">
-        <label for="email">*Email</label>
+        <label for="email"><span style="color: red;">*</span>   Email</label>
         <input
           [ngClass]="{
             'is-invalid':  registerForm.controls['email'].touched && registerForm.controls['email'].errors
@@ -72,7 +72,7 @@
       </div>
       <br />
       <div class="form-group">
-        <label for="password">*Password</label>
+        <label for="password"><span style="color: red;">*</span>   Password</label>
         <input
           [ngClass]="{
             'is-invalid': registerForm.controls['password'].touched && registerForm.controls['password'].errors
@@ -105,7 +105,7 @@
       </div>
       <br />
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">Sign-Up</button>
+        <button class="btn btn-dark" type="submit">Sign-Up</button>
       </div>
     </form>
     <br />
@@ -113,7 +113,7 @@
     <div>
       <p style="color: red">{{ msg }}</p>
 
-      <a href="/login">Do You have An Account ?Login! </a>
+      <a style="color: black;" href="/login">Do You have An Account ?Login! </a>
     </div>
   </div>
 </div>

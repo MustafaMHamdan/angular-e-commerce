@@ -31,7 +31,8 @@ export class SignInComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit() { ;
+
    }
   signIn() {
     this.registerForm.markAllAsTouched();
@@ -45,11 +46,13 @@ export class SignInComponent implements AfterViewInit {
     this._HttpClient
       .post(`http://localhost:5000/login`, this.registerForm.value)
       .subscribe({
-        next: (v) => {
+        next: (v) => {console.log(v);
+
           (this.token = v),
             localStorage.setItem('token', this.token.token),
             localStorage.setItem('role', this.token.result[0].role_id),
-            localStorage.setItem('userId', this.token.result[0].UserID);
+            localStorage.setItem('userId', this.token.result[0].UserID);//userName
+            localStorage.setItem('userName', this.token.result[0].userName);
           if (this.token != '') {
             this.route.navigate(['/products']).then(() => {
               window.location.reload();

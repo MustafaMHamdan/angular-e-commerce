@@ -1,22 +1,27 @@
+<div class="container">
+  <div class="card-table">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Order number</th>
 
-  <div class="container">
-    <div class="card-table">
-      <table class="table table-responsive">
-        <thead>
-          <tr>
-            <th>Order number</th>
+          <th>order details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of allPastOrders; let i = index">
+          <td>{{ item[0]["order_id"] }}</td>
 
-            <th>order details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of allPastOrders; let i = index">
-            <td>{{ item[0]["order_id"] }}</td>
-
-            <td><button (click)="detailsDialog(item[0]['order_id'])" class="btn btn-primary">check details</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          <td>
+            <button
+              (click)="detailsDialog(item[0]['order_id'])"
+              class="btn btn-dark"
+            >
+              check details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
- 
+</div>
