@@ -21,14 +21,14 @@
               <img style="width: 120px" src="{{ item.image }}" alt="" />
             </td>
 
-            <th style="width: 12%">{{ item.price | currency }}</th>
-            <td style="width: 12%">{{ item.quantity }}</td>
-            <td style="width: 24%">
+            <th style="width: 24%">{{ item.price | currency }}</th>
+            <td style="width: 24%">{{ item.quantity }}</td>
+            <td style="width: 12%">
               {{ item.quantity * item.price | currency }}
             </td>
           </tr>
           <tr>
-            <td class="rr" colspan="4"></td>
+            <td class="rr" colspan="2"></td>
 
             <td>
               <button routerLink="/products" class="btn btn-primary">
@@ -48,7 +48,9 @@
                 Submit
               </button>
             </td>
-
+          </tr>
+          <tr>
+            <td>tax</td>
           </tr>
         </tbody>
       </table>
@@ -57,16 +59,15 @@
 </ng-container>
 <ng-container *ngIf="!cartProducts.length">
   <div class="container">
-    <div class="card">
-
-    </div>
+    <div class="card"></div>
     <div class="center">
-
       <h4>There is No Current Order!</h4>
       <h6>you can check your past order here</h6>
-      <button routerLink="/orders-history" class="btn btn-primary">Orders History</button>
+      <button routerLink="/orders-history" class="btn btn-primary">
+        Orders History
+      </button>
     </div>
   </div>
 
-
->
+  >
+</ng-container>
