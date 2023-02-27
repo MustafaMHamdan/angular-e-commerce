@@ -1,5 +1,4 @@
-DROP DATABASE angular_cart;
-
+ 
 CREATE DATABASE angular_cart;
 
 USE angular_cart;
