@@ -100,6 +100,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+
   getProducts() {
     this.api.getProduct().subscribe((res) => {
       this.productList = res;

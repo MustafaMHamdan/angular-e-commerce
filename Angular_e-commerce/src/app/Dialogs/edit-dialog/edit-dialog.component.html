@@ -90,7 +90,8 @@
     <div class="form-group">
       <label for="image">*Image</label>
       <input
-        class="form-control"
+
+#image        class="form-control"
         id="image"
         [(ngModel)]="data.image"
         name="image"
@@ -104,6 +105,7 @@
         }"
         formControlName="image"
       />
+      <img [src]="image.value" style="height: 50px;width: 50px;">
       <div
         *ngIf="
           registerForm.controls['image'].touched &&

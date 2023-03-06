@@ -33,6 +33,23 @@ export class ProductDialogComponent {
     });
   }
 
+  url: any;
+
+  onselectFile(event: any) {
+    if (!event.target.files[0] || event.target.files[0].length == 0) {
+      return;
+    }
+    let mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.url = reader.result;
+    };
+  }
+
   addNewProduct() {
     this.registerForm.markAllAsTouched();
 
